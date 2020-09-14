@@ -2,5 +2,8 @@
     "singin": "Oturum Aç",
     "DARK": "Siyah",
     "LIGHT": "Acik",
-    "forgetPassword": "Forget your password?"
+    "forgetPassword": "Forget your password?",
+    "password": "Sifre",
+    "invalidEmail": "Geçersiz Email",
+    "sixCharter": "en az 6 karakter"
 }

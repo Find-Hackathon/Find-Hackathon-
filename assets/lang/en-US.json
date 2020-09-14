@@ -2,5 +2,8 @@
     "signin": "Sign in",
     "DARK": "Dark",
     "LIGHT": "Light",
-    "forgetPassword": "Forget your password?"
+    "forgetPassword": "Forget your password?",
+    "password": "Password",
+    "sixCharter": "at least 6 characters",
+    "invalidEmail": "Invalid email"
 }

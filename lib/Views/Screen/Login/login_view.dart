@@ -65,19 +65,19 @@ class _LoginViewState extends State<LoginView> {
             OutlineTextField(
               labelText: "Email",
               validator: (value) =>
-                  value.isValidEmail() ? null : "Invalid email",
+                  value.isValidEmail() ? null : "invalidEmail".locale,
               onChanged: (value) {
                 viewModel.email = value;
               },
             ),
             SpaceSeperator(),
             OutlineTextField(
-              labelText: "Password",
+              labelText: "password".locale,
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
               onChanged: (value) => viewModel.password = value,
               validator: (value) =>
-                  value.length > 6 ? null : "at least 6 characters",
+                  value.length > 6 ? null : "sixCharter".locale,
             ),
             SpaceSeperator(),
             FatButton(
