@@ -1,6 +1,9 @@
 {
-    "Login": "Giris",
+    "singin": "Oturum Aç",
     "DARK": "Siyah",
-    "LIGHT": "Acik"
-
+    "LIGHT": "Acik",
+    "forgetPassword": "Forget your password?",
+    "password": "Sifre",
+    "invalidEmail": "Geçersiz Email",
+    "sixCharter": "en az 6 karakter"
 }

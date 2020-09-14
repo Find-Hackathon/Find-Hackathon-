@@ -7,7 +7,8 @@ import 'Core/Notifier/app_provider.dart';
 import 'Core/Notifier/theme_provider.dart';
 import 'Core/Service/Localization/language_service.dart';
 import 'Core/Service/Navigation/navigation_service.dart';
-import 'Views/Login/login_view.dart';
+import 'Views/Screen/Login/login_view.dart';
+import 'Views/Screen/Splash/splash_view.dart';
 
 void main() {
   runApp(
