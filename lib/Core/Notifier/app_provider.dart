@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import '../../Views/Screen/Login/login_view_model.dart';
 import 'theme_provider.dart';
 
 class AppProvider {
@@ -15,6 +16,9 @@ class AppProvider {
   List<SingleChildWidget> providers = [
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => LoginViewModel(),
     ),
   ];
 }

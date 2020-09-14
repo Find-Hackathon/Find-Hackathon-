@@ -6,8 +6,8 @@ import 'textTheme.dart';
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   backgroundColor: AppColors.kWhite,
-  primaryColor: AppColors.kDartGrey,
-  accentColor: AppColors.kYellow,
+  primaryColor: AppColors.kGreen,
+  accentColor: AppColors.kBlack,
   scaffoldBackgroundColor: AppColors.kWhite,
   textTheme: robototexttheme,
 );
