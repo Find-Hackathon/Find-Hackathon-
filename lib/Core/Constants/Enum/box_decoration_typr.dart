@@ -1,0 +1,1 @@
+enum BoxDecorationType { Low, Hight }
