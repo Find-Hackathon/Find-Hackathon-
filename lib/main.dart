@@ -1,3 +1,4 @@
+import 'package:FindHackathon/Views/Screen/Onboarding/onboarding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +7,6 @@ import 'Core/Notifier/app_provider.dart';
 import 'Core/Notifier/theme_provider.dart';
 import 'Core/Service/Localization/language_service.dart';
 import 'Core/Service/Navigation/navigation_service.dart';
-import 'Views/Screen/Login/login_view.dart';
-import 'Views/Screen/Splash/splash_view.dart';
 
 void main() {
   runApp(
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       navigatorKey: NavigatorService.instance.navigatorKey,
       theme: Provider.of<ThemeProvider>(context).getTheme,
-      home: SplashScreen(),
+      home: OnboardingHome(),
     );
   }
 }
