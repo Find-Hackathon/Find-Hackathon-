@@ -7,6 +7,7 @@ import 'Core/Notifier/theme_provider.dart';
 import 'Core/Service/Localization/language_service.dart';
 import 'Core/Service/Navigation/navigation_service.dart';
 import 'Views/Screen/Login/login_view.dart';
+import 'Views/Screen/Splash/splash_view.dart';
 
 void main() {
   runApp(
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       navigatorKey: NavigatorService.instance.navigatorKey,
       theme: Provider.of<ThemeProvider>(context).getTheme,
-      home: LoginView(),
+      home: SplashScreen(),
     );
   }
 }
