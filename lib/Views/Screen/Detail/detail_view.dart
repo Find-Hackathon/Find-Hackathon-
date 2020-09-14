@@ -9,12 +9,16 @@ class DetailView extends StatefulWidget {
 }
 
 class _DetailViewState extends State<DetailView> {
-  String email;
+  bool state;
   SharedPreferences prefs;
 
   @override
   void initState() {
-    getSharedPreferences();
+    _getUserState().then((state) {
+      setState(() {
+        this.state = state;
+      });
+    });
     super.initState();
   }
 
@@ -26,15 +30,15 @@ class _DetailViewState extends State<DetailView> {
         ),
         body: Column(
           children: [
-            Text(prefs.getString("password")),
+            Text("state : " + prefs.getBool("isLoggedIn").toString()),
+            Text("password : " + prefs.getString("password")),
+            Text("email : " + prefs.get("email")),
             OutlineButton(
                 child: Text("Logout"),
                 onPressed: () {
-                  setState(() {
-                    prefs.setBool("isLoggedIn", false);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginView()));
-                  });
+                  prefs.setBool("isLoggedIn", false);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginView()));
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)))
@@ -44,5 +48,11 @@ class _DetailViewState extends State<DetailView> {
 
   getSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  _getUserState() async {
+    prefs = await SharedPreferences.getInstance();
+    var state = prefs.getBool('isLoggedIn');
+    return state;
   }
 }
