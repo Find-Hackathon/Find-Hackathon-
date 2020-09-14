@@ -1,4 +1,3 @@
-import 'package:FindHackathon/Views/Screen/Login/login_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,8 +36,7 @@ class _DetailViewState extends State<DetailView> {
                 child: Text("Logout"),
                 onPressed: () {
                   prefs.setBool("isLoggedIn", false);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginView()));
+                  Navigator.pop(context);
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)))
