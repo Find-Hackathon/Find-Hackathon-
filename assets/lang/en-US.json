@@ -1,5 +1,6 @@
 {
     "signin": "Sign in",
     "DARK": "Dark",
-    "LIGHT": "Light"
+    "LIGHT": "Light",
+    "forgetPassword": "Forget your password?"
 }

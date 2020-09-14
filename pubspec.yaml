@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.3.2+1
   google_fonts: ^1.1.0
   shared_preferences: 0.5.10
+  lottie: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/lang/
+    - assets/lottie/
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

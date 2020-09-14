@@ -1,6 +1,9 @@
+import 'package:FindHackathon/Core/Components/lottie_file.dart';
+import 'package:FindHackathon/Core/Constants/App/app_lottie.dart';
 import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
 import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
 import 'package:FindHackathon/Views/Widgets/space_seperator.dart';
+import 'package:FindHackathon/Views/Widgets/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,19 +26,32 @@ class _LoginViewState extends State<LoginView> {
 
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
-      appBar: buildAppBar(context),
       body: buildLoginForm(),
     );
   }
 
-  Widget buildAppBar(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(context.height * .20),
-      child: OvalAppBar(text: "signin"),
+  Widget buildLoginForm() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          buildOvalAppBar(),
+          buildBody(),
+        ],
+      ),
     );
   }
 
-  Widget buildLoginForm() {
+  OvalAppBar buildOvalAppBar() {
+    return OvalAppBar(
+      text: "signin",
+      height: context.height * .4,
+      widget: LottieFile(
+        lottie: AppLottie.programmingAnimation,
+      ),
+    );
+  }
+
+  Padding buildBody() {
     return Padding(
       padding: EdgeInsets.all(context.constMediumValue),
       child: Form(
@@ -74,6 +90,8 @@ class _LoginViewState extends State<LoginView> {
                 }
               },
             ),
+            SpaceSeperator(),
+            ButtonText(onPressed: () {}, text: "forgetPassword")
           ],
         ),
       ),
