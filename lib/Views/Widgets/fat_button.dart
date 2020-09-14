@@ -1,7 +1,9 @@
-import 'package:FindHackathon/Core/Extension/string_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../Core/Extension/context_extension.dart';
+import '../../Core/Extension/string_extension.dart';
+import '../../Core/Utils/custom_box_shadow.dart';
+import '../../Core/Utils/custom_linear_grediant.dart';
 
 class FatButton extends StatelessWidget {
   final String text;
@@ -15,13 +17,12 @@ class FatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: context.theme.primaryColor.withOpacity(.4),
-            offset: Offset(45, 20),
-            blurRadius: 50,
-            spreadRadius: 25)
-      ]),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(context.constHighValue),
+          gradient: customLinearGradient(context.theme.primaryColor),
+          boxShadow: [
+            buildBoxShadow(context.theme.primaryColor),
+          ]),
       child: FlatButton(
         onPressed: onPressed,
         child: Padding(
@@ -31,10 +32,6 @@ class FatButton extends StatelessWidget {
             style: context.textTheme.headline6
                 .copyWith(color: context.theme.backgroundColor),
           ),
-        ),
-        color: context.theme.primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(context.constHighValue),
         ),
       ),
     );

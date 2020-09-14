@@ -31,6 +31,6 @@ class LocaleManager {
   }
 
   Future<void> getIsLoggedIn() async {
-    await _preferences.getBool("isLoggedIn");
+    _preferences.getBool("isLoggedIn");
   }
 }
