@@ -7,7 +7,7 @@ final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   backgroundColor: AppColors.kBlack,
   primaryColor: AppColors.kWhite,
-  accentColor: AppColors.kYellow,
+  accentColor: AppColors.kGreen,
   scaffoldBackgroundColor: AppColors.kBlack,
   textTheme: robototexttheme,
 );
