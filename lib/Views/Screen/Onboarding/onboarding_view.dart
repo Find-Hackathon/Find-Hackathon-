@@ -1,8 +1,10 @@
+import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Widgets/fat_button.dart';
 import 'package:FindHackathon/Views/Widgets/text_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:FindHackathon/Core/Theme/textTheme.dart';
 import 'onboarding_view_model.dart';
+import 'package:flutter/material.dart';
 
 class OnboardingHome extends StatefulWidget {
   OnboardingHome({Key key}) : super(key: key);
@@ -37,7 +39,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
               });
             },
             itemCount: slides.length,
-            itemBuilder: (contex, index) {
+            itemBuilder: (context, index) {
               return SliderTile(
                   assetPath: slides[index].getImageAssetPath(),
                   desc: slides[index].getDescription(),
@@ -84,14 +86,14 @@ class SliderTile extends StatelessWidget {
             Spacer(
               flex: 20,
             ),
-            buildTitle(title),
+            buildTitle(title, context),
             Spacer(
               flex: 15,
             ),
             Container(
               margin: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.05),
-              child: buildDescription(desc),
+              child: buildDescription(desc, context),
             ),
             Spacer(
               flex: 15,
@@ -137,57 +139,16 @@ class SliderTile extends StatelessWidget {
     );
   }
 
-  Text buildDescription(String description) {
-    return Text(
-      desc,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 16,
-      ),
-    );
+  Text buildDescription(String description, BuildContext context) {
+    return Text(desc,
+        textAlign: TextAlign.center, style: context.textTheme.bodyText2);
   }
 
-  Text buildTitle(String title) {
+  Text buildTitle(String title, BuildContext context) {
     return Text(
       title,
       textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
+      style: context.textTheme.headline1,
     );
   }
 }
-/*
-
-Container(
-                child: RaisedButton(
-                  onPressed: () {                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromRGBO(161, 223, 197, 0.5),
-                            Color.fromRGBO(86, 197, 150, 1)
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 100.0, maxHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        slides[slideIndex].getButtonText(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              */
