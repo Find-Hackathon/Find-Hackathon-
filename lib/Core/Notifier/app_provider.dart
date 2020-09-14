@@ -1,3 +1,4 @@
+import 'package:FindHackathon/Views/Login/login_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -15,6 +16,9 @@ class AppProvider {
   List<SingleChildWidget> providers = [
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => LoginViewModel(),
     ),
   ];
 }
