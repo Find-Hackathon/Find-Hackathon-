@@ -22,6 +22,7 @@ class WelcomeScreen extends StatelessWidget {
           children: [
             buildExpandedImage(),
             buildExpandedSignIn(context),
+            SpaceSeperator(),
             buildExpandedSignUp(context),
             SpaceSeperator(),
             Spacer(flex: 2),
@@ -46,17 +47,14 @@ class WelcomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.all(context.constHighValue),
-            child: Container(
-              height: context.height * .4,
-              width: context.width * .8,
-              child: FatButtonBorder(
-                text: "Sign In",
-                onPressed: () {
-                  NavigatorService.instance.navigateTo(LoginView());
-                },
-              ),
+          Container(
+            height: context.height * .1,
+            width: context.width * .8,
+            child: FatButtonBorder(
+              text: "Sign In",
+              onPressed: () {
+                NavigatorService.instance.navigateTo(LoginView());
+              },
             ),
           ),
         ],
@@ -67,17 +65,14 @@ class WelcomeScreen extends StatelessWidget {
   Expanded buildExpandedSignUp(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: Padding(
-        padding: EdgeInsets.all(context.constHighValue),
-        child: Container(
-          height: context.height * .4,
-          width: context.width * .8,
-          child: FatButton(
-            text: "Sign Up",
-            onPressed: () {
-              NavigatorService.instance.navigateTo(LoginView());
-            },
-          ),
+      child: Container(
+        height: context.height * .1,
+        width: context.width * .8,
+        child: FatButton(
+          text: "Sign Up",
+          onPressed: () {
+            NavigatorService.instance.navigateTo(LoginView());
+          },
         ),
       ),
     );
