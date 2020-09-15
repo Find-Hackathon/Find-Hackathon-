@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view_model.dart';
+import 'package:FindHackathon/Views/Widgets/fat_button.dart';
 import 'package:flutter/material.dart';
 
 class HackatonDetail extends StatefulWidget {
@@ -29,7 +30,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
           body: Column(
             children: [
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: ClipRRect(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(context.constMediumValue),
@@ -46,18 +47,53 @@ class _HackatonDetailState extends State<HackatonDetail> {
                     ))),
               ),
               Spacer(
-                flex: 2,
+                flex: 1,
               ),
-              Text(
-                detailModel.name,
-                style: context.textTheme.headline4,
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  detailModel.name,
+                  style: context.textTheme.headline4,
+                ),
               ),
               Spacer(
-                flex: 2,
+                flex: 1,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [],
+                children: [
+                  Text(detailModel.stars.toString()),
+                  Icon(Icons.star,
+                      color:
+                          detailModel.stars >= 1 ? Colors.yellow : Colors.grey),
+                  Icon(Icons.star,
+                      color:
+                          detailModel.stars >= 2 ? Colors.yellow : Colors.grey),
+                  Icon(Icons.star,
+                      color:
+                          detailModel.stars >= 3 ? Colors.yellow : Colors.grey),
+                  Icon(Icons.star,
+                      color:
+                          detailModel.stars >= 4 ? Colors.yellow : Colors.grey),
+                  Icon(Icons.star,
+                      color:
+                          detailModel.stars >= 5 ? Colors.yellow : Colors.grey)
+                ],
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              Text(
+                detailModel.description,
+                style: context.textTheme.bodyText2,
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              FatButton(
+                text: "Join",
+              ),
+              Spacer(
+                flex: 1,
               )
             ],
           )),
