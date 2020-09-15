@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
       child: FatButton(
         text: "Sign Up",
         onPressed: () {
-          NavigatorService.instance.navigateTo(LoginView());
+          NavigatorService.instance.navigateTo(RegisterView());
         },
       ),
     );
