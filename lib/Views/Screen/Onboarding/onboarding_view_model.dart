@@ -5,6 +5,7 @@ class SliderModel {
   String lowerButtonText;
   String buttonText;
   SliderModel({this.imagePath, this.title, this.description});
+
   void setImageAssetPath(String getImagepath) {
     imagePath = getImagepath;
   }
@@ -51,32 +52,31 @@ List<SliderModel> getSlides() {
   SliderModel sliderModel = new SliderModel();
 
   //1
-  sliderModel.setDescription(
-      "Description1sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-  sliderModel.setTitle("title1");
   sliderModel.setImageAssetPath("assets/images/illustration.png");
-  sliderModel.setButtonText("Next");
-  sliderModel.setLowerButtonText("Skip This");
+  sliderModel.setTitle("Yarışmalara Katıl");
+  sliderModel
+      .setDescription("Güncel olan yarışmaları görüntüle ve onlara katıl.");
   slides.add(sliderModel);
 
   sliderModel = new SliderModel();
 
   //2
-  sliderModel.setDescription("Description2");
-  sliderModel.setTitle("title2");
   sliderModel.setImageAssetPath("assets/images/illustration2.png");
-  sliderModel.setButtonText("Next");
-  sliderModel.setLowerButtonText("Skip This");
+  sliderModel.setTitle("Takım Arkadaşı Seç");
+  sliderModel.setDescription(
+      "Takım arkadaşın yoksa niteliklerine göre eşleşebilirsin.");
+  // sliderModel.setButtonText("Next");
+  // sliderModel.setLowerButtonText("Skip This");
   slides.add(sliderModel);
 
   sliderModel = new SliderModel();
 
   //3
-  sliderModel.setDescription("Description3");
-  sliderModel.setTitle("title3");
   sliderModel.setImageAssetPath("assets/images/illustration3.png");
-  sliderModel.setButtonText("Next");
-  sliderModel.setLowerButtonText("Skip This");
+  sliderModel.setTitle("Puanları Topla");
+  sliderModel.setDescription("Kazandıkça puanları topla ve ödülleri kazan.");
+  // sliderModel.setButtonText("Next");
+  // sliderModel.setLowerButtonText("Skip This");
   slides.add(sliderModel);
 
   sliderModel = new SliderModel();
