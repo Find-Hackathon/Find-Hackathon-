@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "817554984983",
+    "firebase_url": "https://hackathonfind-6759f.firebaseio.com",
+    "project_id": "hackathonfind-6759f",
+    "storage_bucket": "hackathonfind-6759f.appspot.com"
+  },
+  "client": [{
+    "client_info": {
+      "mobilesdk_app_id": "1:817554984983:android:adcecc39a85e6c97690c52",
+      "android_client_info": {
+        "package_name": "com.example.FindHackathon"
+      }
+    },
+    "oauth_client": [{
+      "client_id": "817554984983-9jmmfp6eulp04ggpufcca3572eptit9u.apps.googleusercontent.com",
+      "client_type": 3
+    }],
+    "api_key": [{
+      "current_key": "AIzaSyDnxxxtayYlKHgwhNMvDCOvSFMXnpMO1Lg"
+    }],
+    "services": {
+      "appinvite_service": {
+        "other_platform_oauth_client": [{
+          "client_id": "817554984983-9jmmfp6eulp04ggpufcca3572eptit9u.apps.googleusercontent.com",
+          "client_type": 3
+        }]
+      }
+    }
+  }],
+  "configuration_version": "1"
+}

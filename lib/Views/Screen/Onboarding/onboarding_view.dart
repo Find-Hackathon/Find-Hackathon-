@@ -1,6 +1,4 @@
 import '../../../Core/Extension/context_extension.dart';
-import '../../../Core/Service/Navigation/navigation_service.dart';
-import '../Login/login_view.dart';
 import '../Welcome/WelcomeScreen.dart';
 import '../../Widgets/fat_button.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +91,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
 class SliderTile extends StatelessWidget {
   final String assetPath, title, desc;
   final int index, itemCount;
-  int slideIndex;
+  final int slideIndex;
 
   SliderTile(
       {this.assetPath,
