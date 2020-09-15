@@ -1,8 +1,6 @@
-import 'package:FindHackathon/Views/Screen/Welcome/WelcomeScreen.dart';
-
-import 'Views/Screen/Chat/chat_screen.dart';
-import 'Views/Screen/Splash/splash_view.dart';
+import 'package:FindHackathon/Views/Home/home_view.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +8,11 @@ import 'Core/Notifier/app_provider.dart';
 import 'Core/Notifier/theme_provider.dart';
 import 'Core/Service/Localization/language_service.dart';
 import 'Core/Service/Navigation/navigation_service.dart';
+import 'Views/Screen/Splash/splash_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     EasyLocalization(
         path: LanguageService.path,
