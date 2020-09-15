@@ -34,6 +34,8 @@ dependencies:
   google_fonts: ^1.1.0
   shared_preferences: 0.5.10
   lottie: ^0.6.0
+  firebase_auth: ^0.18.0+1
+  firebase_core : ^0.5.0
 
 dev_dependencies:
   flutter_test:

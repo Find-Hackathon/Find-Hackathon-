@@ -24,7 +24,6 @@ class _LoginViewState extends State<RegisterView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // getSharedPreferences();
   }
@@ -119,6 +118,7 @@ class _LoginViewState extends State<RegisterView> {
               text: "signin".locale,
               onPressed: () {
                 if (viewModel.formKey.currentState.validate()) {
+                  viewModel.firebaseUserCreate();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginView()),

@@ -26,7 +26,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // getSharedPreferences();
   }
@@ -101,7 +100,7 @@ class _LoginViewState extends State<LoginView> {
             SpaceSeperator(),
             FatButton(
               text: "signin".locale,
-              onPressed: () {
+              onPressed: () async {
                 if (viewModel.formKey.currentState.validate()) {
                   // print(viewModel.email + "   " + viewModel.password);
 
@@ -114,7 +113,8 @@ class _LoginViewState extends State<LoginView> {
                   //
                   // print("is Logged in : " +
                   //     prefs.getBool("isLoggedIn").toString());
-
+                  String id = await viewModel.firebaseLogin();
+                  print(id);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => DetailView()),
