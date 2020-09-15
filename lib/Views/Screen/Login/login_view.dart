@@ -2,7 +2,6 @@ import 'package:FindHackathon/Core/Components/lottie_file.dart';
 import 'package:FindHackathon/Core/Constants/App/app_lottie.dart';
 import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
 import 'package:FindHackathon/Views/Screen/ForgotPassword/forgot_password.dart';
-import 'package:FindHackathon/Views/Screen/Register/register_view.dart';
 import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
 import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
 import 'package:FindHackathon/Views/Widgets/space_seperator.dart';
@@ -124,16 +123,6 @@ class _LoginViewState extends State<LoginView> {
                   viewModel.validationChange(true);
                 }
               },
-            ),
-            SpaceSeperator(),
-            FatButton(
-                text: "register".locale,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterView()),
-                  );
-                }
             ),
             SpaceSeperator(),
             ButtonText(

@@ -1,6 +1,6 @@
 import 'package:FindHackathon/Core/Constants/App/app_image.dart';
 import 'package:FindHackathon/Core/Service/Navigation/navigation_service.dart';
-import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:FindHackathon/Views/Screen/Register/register_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Core/Extension/context_extension.dart';
@@ -71,7 +71,7 @@ class WelcomeScreen extends StatelessWidget {
         child: FatButton(
           text: "Sign Up",
           onPressed: () {
-            NavigatorService.instance.navigateTo(LoginView());
+            NavigatorService.instance.navigateTo(RegisterView());
           },
         ),
       ),
