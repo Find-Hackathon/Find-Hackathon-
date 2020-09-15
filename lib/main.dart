@@ -1,5 +1,6 @@
 import 'package:FindHackathon/Views/Screen/Welcome/WelcomeScreen.dart';
 
+import 'Views/Screen/Chat/chat_screen.dart';
 import 'Views/Screen/Splash/splash_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

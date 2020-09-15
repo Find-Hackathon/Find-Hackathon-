@@ -19,6 +19,8 @@ class WelcomeScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(context.constLowValue),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             buildExpandedImage(),
             buildExpandedSignIn(context),
@@ -41,39 +43,24 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 
-  Expanded buildExpandedSignIn(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: context.height * .1,
-            width: context.width * .8,
-            child: FatButtonBorder(
-              text: "Sign In",
-              onPressed: () {
-                NavigatorService.instance.navigateTo(LoginView());
-              },
-            ),
-          ),
-        ],
+  Widget buildExpandedSignIn(BuildContext context) {
+    return Container(
+      child: FatButtonBorder(
+        text: "Sign In",
+        onPressed: () {
+          NavigatorService.instance.navigateTo(LoginView());
+        },
       ),
     );
   }
 
-  Expanded buildExpandedSignUp(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        height: context.height * .1,
-        width: context.width * .8,
-        child: FatButton(
-          text: "Sign Up",
-          onPressed: () {
-            NavigatorService.instance.navigateTo(RegisterView());
-          },
-        ),
+  Widget buildExpandedSignUp(BuildContext context) {
+    return Container(
+      child: FatButton(
+        text: "Sign Up",
+        onPressed: () {
+          NavigatorService.instance.navigateTo(RegisterView());
+        },
       ),
     );
   }
