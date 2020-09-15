@@ -13,11 +13,11 @@ class _DetailViewState extends State<DetailView> {
 
   @override
   void initState() {
-    _getUserState().then((state) {
-      setState(() {
-        this.state = state;
-      });
-    });
+    // _getUserState().then((state) {
+    //   setState(() {
+    //     this.state = state;
+    //   });
+    // });
     super.initState();
   }
 
@@ -29,13 +29,13 @@ class _DetailViewState extends State<DetailView> {
         ),
         body: Column(
           children: [
-            Text("state : " + prefs.getBool("isLoggedIn").toString()),
-            Text("password : " + prefs.getString("password")),
-            Text("email : " + prefs.get("email")),
+            // Text("state : " + prefs.getBool("isLoggedIn").toString()),
+            // Text("password : " + prefs.getString("password")),
+            // Text("email : " + prefs.get("email")),
             OutlineButton(
                 child: Text("Logout"),
                 onPressed: () {
-                  prefs.setBool("isLoggedIn", false);
+                  // prefs.setBool("isLoggedIn", false);
                   Navigator.pop(context);
                 },
                 shape: new RoundedRectangleBorder(
@@ -44,13 +44,9 @@ class _DetailViewState extends State<DetailView> {
         ));
   }
 
-  getSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-  }
-
-  _getUserState() async {
-    prefs = await SharedPreferences.getInstance();
-    var state = prefs.getBool('isLoggedIn');
-    return state;
-  }
+// _getUserState() async {
+//   prefs = await SharedPreferences.getInstance();
+//   var state = prefs.getBool('isLoggedIn');
+//   return state;
+// }
 }
