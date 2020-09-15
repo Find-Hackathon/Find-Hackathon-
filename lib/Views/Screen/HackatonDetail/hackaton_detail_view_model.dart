@@ -5,7 +5,7 @@ class HackatonDetailModel extends BaseViewModel {
   String description;
   int stars;
   List<String> imagePaths;
-
+//Todo:User,Profile Pictures
   void setName(String getName) {
     name = getName;
   }
@@ -15,7 +15,7 @@ class HackatonDetailModel extends BaseViewModel {
   }
 
   void setStars(int getStars) {
-    stars = getStars % 5;
+    stars = getStars;
   }
 
   void addImagePath(String getImagePath) {
@@ -49,10 +49,11 @@ HackatonDetailModel getHackatonDetail() {
   model.imagePaths = new List<String>();
   model.setName("VBT Hackaton");
   model.setDescription(
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).");
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here'");
   model.imagePaths.add('assets/images/hackatonPlaceHolder1.png');
   model.imagePaths.add('assets/images/hackatonPlaceHolder2.png');
   model.imagePaths.add('assets/images/hackatonPlaceHolder3.png');
-  model.setStars(5);
+  model.setStars(4);
   return model;
 }
+
