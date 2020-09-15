@@ -1,6 +1,8 @@
-import 'package:FindHackathon/Core/Extension/context_extension.dart';
-import 'package:FindHackathon/Views/Screen/Login/login_view.dart';
-import 'package:FindHackathon/Views/Widgets/fat_button.dart';
+import '../../../Core/Extension/context_extension.dart';
+import '../../../Core/Service/Navigation/navigation_service.dart';
+import '../Login/login_view.dart';
+import '../Welcome/WelcomeScreen.dart';
+import '../../Widgets/fat_button.dart';
 import 'package:flutter/material.dart';
 
 import 'onboarding_view_model.dart';
@@ -24,8 +26,6 @@ class _OnboardingHomeState extends State<OnboardingHome> {
 */
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
     slides = getSlides();
   }
@@ -141,7 +141,7 @@ class SliderTile extends StatelessWidget {
                 text: "Uygulamaya Geçiş Yap.",
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginView()));
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()));
                 },
               ),
             ),
@@ -153,7 +153,6 @@ class SliderTile extends StatelessWidget {
       ),
     );
   }
-
 
   Text buildDescription(String description, BuildContext context) {
     return Text(desc,
