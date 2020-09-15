@@ -1,9 +1,9 @@
 import 'package:FindHackathon/Core/Constants/App/app_image.dart';
+import 'package:FindHackathon/Views/Screen/Onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 import '../../../Core/Utils/custom_linear_grediant.dart';
-import '../Login/login_view.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => LoginView(),
+          builder: (_) => OnboardingHome(),
         ),
       );
     });

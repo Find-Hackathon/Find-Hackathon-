@@ -1,4 +1,4 @@
-import 'package:FindHackathon/Views/Screen/Onboarding/onboarding_view.dart';
+import 'package:FindHackathon/Views/Screen/Splash/splash_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       navigatorKey: NavigatorService.instance.navigatorKey,
       theme: Provider.of<ThemeProvider>(context).getTheme,
-      home: OnboardingHome(),
+      home: SplashScreen(),
     );
   }
 }
