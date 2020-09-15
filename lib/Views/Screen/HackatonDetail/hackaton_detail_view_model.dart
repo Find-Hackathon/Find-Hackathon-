@@ -5,7 +5,7 @@ class HackatonDetailModel extends BaseViewModel {
   String description;
   int stars;
   List<String> imagePaths;
-
+//Todo:User,Profile Pictures
   void setName(String getName) {
     name = getName;
   }
@@ -53,6 +53,6 @@ HackatonDetailModel getHackatonDetail() {
   model.imagePaths.add('assets/images/hackatonPlaceHolder1.png');
   model.imagePaths.add('assets/images/hackatonPlaceHolder2.png');
   model.imagePaths.add('assets/images/hackatonPlaceHolder3.png');
-  model.setStars(3);
+  model.setStars(4);
   return model;
 }

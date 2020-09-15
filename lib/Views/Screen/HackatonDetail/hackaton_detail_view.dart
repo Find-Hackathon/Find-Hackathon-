@@ -26,42 +26,43 @@ class _HackatonDetailState extends State<HackatonDetail> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-          appBar: AppBar(),
+          //TODO:BottomNavigationBar
           body: Column(
-            children: [
-              Expanded(
-                flex: 5,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(context.constMediumValue),
-                        bottomRight: Radius.circular(context.constMediumValue)),
-                    child: Container(
-                        child: PageView.builder(
-                      itemBuilder: (context, index) {
-                        return Image.asset(
-                          detailModel.imagePaths[index],
-                          fit: BoxFit.cover,
-                        );
-                      },
-                      itemCount: detailModel.imagePaths.length,
-                    ))),
+        children: [
+          Expanded(
+            flex: 4,
+            child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(context.constMediumValue),
+                    bottomRight: Radius.circular(context.constMediumValue)),
+                child: Container(
+                    child: PageView.builder(
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      detailModel.imagePaths[index],
+                      fit: BoxFit.cover,
+                    );
+                  },
+                  itemCount: detailModel.imagePaths.length,
+                ))),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                detailModel.name,
+                style: context.textTheme.headline5,
               ),
-              Spacer(
-                flex: 1,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  detailModel.name,
-                  style: context.textTheme.headline4,
-                ),
-              ),
-              Spacer(
-                flex: 1,
-              ),
-              Row(
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
+              child: Row(
                 children: [
-                  Text(detailModel.stars.toString()),
                   Icon(Icons.star,
                       color:
                           detailModel.stars >= 1 ? Colors.yellow : Colors.grey),
@@ -79,24 +80,26 @@ class _HackatonDetailState extends State<HackatonDetail> {
                           detailModel.stars >= 5 ? Colors.yellow : Colors.grey)
                 ],
               ),
-              Spacer(
-                flex: 1,
-              ),
-              Text(
-                detailModel.description,
-                style: context.textTheme.bodyText2,
-              ),
-              Spacer(
-                flex: 1,
-              ),
-              FatButton(
-                text: "Join",
-              ),
-              Spacer(
-                flex: 1,
-              )
-            ],
-          )),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
+            child: Text(
+              detailModel.description,
+              style: context.textTheme.bodyText2,
+            ),
+          ),
+          Spacer(
+            flex: 1,
+          ),
+          FatButton(
+            text: "Join",
+          ),
+          Spacer(
+            flex: 1,
+          ),
+        ],
+      )),
     );
   }
 }
