@@ -1,9 +1,15 @@
 {
-    "signin": "Sign in",
-    "DARK": "Dark",
-    "LIGHT": "Light",
-    "forgetPassword": "Forget your password?",
-    "password": "Password",
-    "sixCharter": "at least 6 characters",
-    "invalidEmail": "Invalid email"
+  "signin": "Sign in",
+  "DARK": "Dark",
+  "LIGHT": "Light",
+  "name": "Name",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "forgetPassword": "Forget your password?",
+  "confirmPassword": "Confirm Password",
+  "register": "Register",
+  "invalidEmail": "Invalid email",
+  "sixCharter": "at least 6 characters",
+  "threeCharter": "at least 3 characters"
 }

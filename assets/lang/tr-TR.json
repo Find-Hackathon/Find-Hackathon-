@@ -1,9 +1,15 @@
 {
-    "singin": "Oturum Aç",
-    "DARK": "Siyah",
-    "LIGHT": "Acik",
-    "forgetPassword": "Forget your password?",
-    "password": "Sifre",
-    "invalidEmail": "Geçersiz Email",
-    "sixCharter": "en az 6 karakter"
+  "signin": "Oturum Aç",
+  "DARK": "Siyah",
+  "LIGHT": "Acik",
+  "name": "İsim",
+  "username": "Kullanıcı Adı",
+  "email": "Email",
+  "password": "Şifre",
+  "forgetPassword": "Şifremi Unuttum ",
+  "confirmPassword": "Şifreyi Onayla",
+  "register": "Üye Ol",
+  "invalidEmail": "Geçersiz Email",
+  "sixCharter": "en az 6 karakter",
+  "threeCharter": "en az 3 karakter"
 }
