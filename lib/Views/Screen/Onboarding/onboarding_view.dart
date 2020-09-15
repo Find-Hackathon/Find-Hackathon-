@@ -154,7 +154,6 @@ class SliderTile extends StatelessWidget {
     );
   }
 
-
   Text buildDescription(String description, BuildContext context) {
     return Text(desc,
         textAlign: TextAlign.center, style: context.textTheme.bodyText1);
