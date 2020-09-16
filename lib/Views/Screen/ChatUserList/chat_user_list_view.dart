@@ -2,7 +2,11 @@ import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+<<<<<<< HEAD
 import '../../../Core/Extension/context_extension.dart';
+=======
+
+>>>>>>> f186cc0f212a151d79758b517db5614cc5001dd8
 import 'chat_user_list_view_model.dart';
 
 class ChatUserListView extends StatefulWidget {
