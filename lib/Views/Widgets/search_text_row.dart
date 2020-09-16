@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SearchTextField extends StatelessWidget {
+  final searchButtonController;
+  //final deleteButtonController;
+  final VoidCallback onPressed;
+
+  SearchTextField({
+    this.onPressed,
+    this.searchButtonController,
+  });
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return searchTextFieldRow(size);
-  }
-
-  Row searchTextFieldRow(Size size) {
     var controller = TextEditingController();
+    var size = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -31,7 +36,7 @@ class SearchTextField extends StatelessWidget {
               ),
               prefixIcon: IconButton(
                 icon: Icon(Icons.search),
-                onPressed: () {},
+                onPressed: onPressed,
               ),
               suffixIcon: IconButton(
                 icon: Icon(Icons.close),
