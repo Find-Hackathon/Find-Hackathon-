@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../../Core/Base/base_view_model.dart';
 
 class ChatUserModel extends BaseViewModel {
@@ -68,8 +70,20 @@ List<ChatUserModel> mockUsers() {
   userModel.setLastMessage("getLastMessage");
   userModel.setLastMessageTime(new DateTime.now());
   userModel.setUserName("getUserName");
-  userModel.setUserProfilePicture("assets/images/welcome.png");
+  userModel.setUserProfilePicture("assets/images/illustration.png");
+  ChatUserModel userModel1 = new ChatUserModel();
+  userModel1.setUnreadMessagesCount(1);
+  userModel1.setLastMessage("getLastMessage");
+  userModel1.setLastMessageTime(new DateTime.now());
+  userModel1.setUserName("getUserName");
+  userModel1.setUserProfilePicture("assets/images/welcome.png");
+  model.add(userModel1);
   model.add(userModel);
+  model.add(userModel1);
+  model.add(userModel);
+  model.add(userModel1);
+  model.add(userModel);
+  model.add(userModel1);
   model.add(userModel);
   model.add(userModel);
   return model;

@@ -1,7 +1,8 @@
+import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
-
+import '../../../Core/Extension/context_extension.dart';
 import 'chat_user_list_view_model.dart';
 
 class ChatUserListView extends StatefulWidget {
@@ -13,38 +14,52 @@ class ChatUserListView extends StatefulWidget {
 
 class _ChatUserListState extends State<ChatUserListView> {
   List<ChatUserModel> users;
+
+  Size size;
+  var newFormat;
+  String updatedDt;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     users = mockUsers();
+    newFormat = DateFormat("jm");
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-<<<<<<< Updated upstream
-      child: Scaffold(
-        body: Container(
-          child: Column(),
-        ),
-      ),
-    );
-=======
         child: Scaffold(
+      appBar: AppBar(
+        title: Container(
+            margin: EdgeInsets.symmetric(vertical: context.constHighValue),
+            child: SearchTextField()),
+      ),
       body: new ListView.builder(
         itemCount: users.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Card(
-              child: ListTile(
-            leading: CircleAvatar(
-              child: Image.asset(users[index].getUserProfilePicture()),
-            ),
-            title: Text(users[index].getUserName()),
-          ));
+          return Container(
+            child: new Card(
+                color: Colors.white,
+                child: ListTile(
+                  leading: Container(
+                    child: CircleAvatar(
+                      child: Image.asset(users[index].getUserProfilePicture()),
+                    ),
+                  ),
+                  title: Text(users[index].getUserName()),
+                  subtitle: Row(
+                    children: [
+                      Icon(Icons.check),
+                      Text(users[index].getLastMessage()),
+                    ],
+                  ),
+                  trailing:
+                      Text(newFormat.format(users[index].getLastMessageTime())),
+                )),
+          );
         },
       ),
     ));
->>>>>>> Stashed changes
   }
 }
