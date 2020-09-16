@@ -1,4 +1,3 @@
-import 'package:FindHackathon/Core/Service/Network/Response/Error/error_message.dart';
 import 'package:FindHackathon/Views/Screen/Profile/Model/hackathon_model.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
@@ -27,95 +26,8 @@ class ProfileView extends ProfileViewModel {
           children: [
             buildContainerHack(),
             buildFutureBuilderHackList(),
-            buildContainerReview(),
-            buildFutureBuilderReviewList(),
           ],
         ),
-      ),
-    );
-  }
-
-  FutureBuilder<List<HackModel>> buildFutureBuilderReviewList() {
-    return FutureBuilder(
-      future: hackathonService.getHttpList(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
-          case ConnectionState.done:
-            if (snapshot.hasData) {
-              return buildSizedBoxReview();
-            } else {
-              final error = snapshot.error as ErrorMessage;
-              return Center(
-                child: Text("Error"),
-              );
-            }
-            break;
-          default:
-            return Text("Something went wrong");
-        }
-      },
-    );
-  }
-
-  SizedBox buildSizedBoxReview() {
-    return SizedBox(
-      height: 400,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: hackData.length,
-        // itemExtent: 150,
-        itemBuilder: (context, index) {
-          var item = hackData[index];
-          return Padding(
-            padding: EdgeInsets.all(4),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black38,
-                    blurRadius: 3,
-                    spreadRadius: 0,
-                    offset: Offset(1, 1),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(item.statusCode.toString()),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(item.statusCode.toString()),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Text(item.description),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Text(item.description),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
@@ -131,11 +43,11 @@ class ProfileView extends ProfileViewModel {
           case ConnectionState.done:
             if (snapshot.hasData) {
               return SizedBox(
-                height: 100,
+                height: MediaQuery.of(context).size.height / 1.42,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   itemCount: hackData.length,
-                  itemExtent: 150,
+                  itemExtent: MediaQuery.of(context).size.height / 3,
                   itemBuilder: (context, index) {
                     var item = hackData[index];
                     return buildPaddingHack(item);
@@ -143,7 +55,6 @@ class ProfileView extends ProfileViewModel {
                 ),
               );
             } else {
-              final error = snapshot.error as ErrorMessage;
               return Center(
                 child: Text("Error"),
               );
@@ -173,15 +84,30 @@ class ProfileView extends ProfileViewModel {
           ),
           borderRadius: BorderRadius.circular(20),
           color: Colors.grey,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 3,
+              spreadRadius: 0,
+              offset: Offset(1, 1),
+            ),
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
               padding: EdgeInsets.all(8),
-              child: Text(
-                item.statusCode.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 15),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white60,
+                ),
+                child: Text(
+                  item.description,
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
               ),
             )
           ],
@@ -265,20 +191,6 @@ class ProfileView extends ProfileViewModel {
           ),
         )
       ],
-    );
-  }
-
-  Container buildContainerReview() {
-    return Container(
-      padding: EdgeInsets.only(left: 15, top: 25, bottom: 10),
-      alignment: Alignment.bottomLeft,
-      child: Text(
-        "Yorumlar",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
     );
   }
 }
