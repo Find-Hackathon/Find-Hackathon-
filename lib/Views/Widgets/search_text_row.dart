@@ -7,7 +7,9 @@ class SearchTextField extends StatelessWidget {
   //final deleteButtonController;
   final VoidCallback onPressed;
 
+  final Size size;
   SearchTextField({
+    this.size,
     this.onPressed,
     this.searchButtonController,
   });
