@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 
@@ -15,6 +16,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,24 +58,58 @@ class _ChatPageState extends State<ChatPage> {
         itemCount: 20,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                padding: EdgeInsets.all(context.constMediumValue),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(context.constHighValue),
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: Text(
-                  index.toString(),
-                  style: TextStyle(
-                    color: Colors.white,
+            title: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(context.constMediumValue),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(context.constHighValue),
+                    color: Theme.of(context).primaryColor.withOpacity(0.4),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          buildAlignAvatarProfile(context),
+                          buildExpandedDataScreen(context),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ),
+              ],
             ),
           );
         },
+      ),
+    );
+  }
+
+  Expanded buildExpandedDataScreen(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: context.constMediumValue,
+        ),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          //index.toString(),
+          "deneme yazısı yfdsfdsfdsfdsfds fdsf adsfd safds afdsa fdsa fdsafdas",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Align buildAlignAvatarProfile(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: CircleAvatar(
+        radius: context.constHighValue,
+        backgroundImage: NetworkImage("https://picsum.photos/200"),
+        backgroundColor: Colors.transparent,
       ),
     );
   }
@@ -120,6 +156,7 @@ class _ChatPageState extends State<ChatPage> {
   Expanded buildExpandedWriteConsoleMessage() {
     return Expanded(
       child: TextField(
+        controller: textEditingController,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: " Yazınızı yazın.",
