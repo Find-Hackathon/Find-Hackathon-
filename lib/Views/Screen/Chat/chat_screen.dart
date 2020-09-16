@@ -1,22 +1,36 @@
+import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 
 class ChatPage extends StatefulWidget {
-  final String groupId;
-  final String userName;
-  final String gorupName;
+  String groupId;
+  String userName;
+  String gorupName;
+  final String conversationId;
+  final String userId;
 
-  ChatPage({Key key, this.groupId, this.userName, this.gorupName})
-      : super(key: key);
+  // ChatPage({Key key, this.groupId, this.userName, this.gorupName})
+  //     : super(key: key);
+  ChatPage({Key key, this.userId, this.conversationId}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
-  TextEditingController textEditingController = TextEditingController();
+  CollectionReference ref;
+  final TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    ref = FirebaseFirestore.instance
+        .collection('conversations/${widget.conversationId}/messages');
+    print(widget.userId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +52,17 @@ class _ChatPageState extends State<ChatPage> {
       backgroundColor: Colors.white,
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(
+              context, MaterialPageRoute(builder: (context) => DetailView()));
+        },
       ),
+      actions: [
+        InkWell(
+          child: Icon(Icons.more_vert),
+          onTap: () {},
+        )
+      ],
       centerTitle: true,
       elevation: 0,
       title: Text(
@@ -53,63 +76,38 @@ class _ChatPageState extends State<ChatPage> {
 
   Expanded buildExpandedMessageScreen() {
     return Expanded(
-      child: ListView.builder(
-        reverse: true,
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(context.constMediumValue),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(context.constHighValue),
-                    color: Theme.of(context).primaryColor.withOpacity(0.4),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          buildAlignAvatarProfile(context),
-                          buildExpandedDataScreen(context),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+      child: StreamBuilder(
+          stream: ref.orderBy('timeStamp').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            return !snapshot.hasData
+                ? CircularProgressIndicator()
+                : ListView(
+                    children: snapshot.data.docs
+                        .map((document) => buildListTile(document, context))
+                        .toList());
+          }),
     );
   }
 
-  Expanded buildExpandedDataScreen(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: context.constMediumValue,
-        ),
-        alignment: Alignment.centerLeft,
-        child: Text(
-          //index.toString(),
-          "deneme yazısı yfdsfdsfdsfdsfds fdsf adsfd safds afdsa fdsa fdsafdas",
-          style: TextStyle(
-            color: Colors.black,
+  ListTile buildListTile(document, BuildContext context) {
+    return ListTile(
+      title: Align(
+        alignment: widget.userId != document.get('senderId')
+            ? Alignment.centerLeft
+            : Alignment.centerRight,
+        child: Container(
+          padding: EdgeInsets.all(context.constMediumValue),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(context.constHighValue),
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Text(
+            document.get('message'),
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  Align buildAlignAvatarProfile(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: CircleAvatar(
-        radius: context.constHighValue,
-        backgroundImage: NetworkImage("https://picsum.photos/200"),
-        backgroundColor: Colors.transparent,
       ),
     );
   }
@@ -171,7 +169,14 @@ class _ChatPageState extends State<ChatPage> {
         Icons.send,
         color: Colors.grey[900],
       ),
-      onPressed: () {},
+      onPressed: () async {
+        await ref.add({
+          "senderId": widget.userId,
+          "message": textEditingController.text,
+          "timeStamp": DateTime.now()
+        });
+        textEditingController.text = "";
+      },
     );
   }
 }

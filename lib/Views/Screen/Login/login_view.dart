@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 import '../../../Core/Extension/string_extension.dart';
+import '../../User.dart';
 import '../../Widgets/fat_button.dart';
 import 'login_view_model.dart';
 
@@ -95,7 +96,7 @@ class _LoginViewState extends State<LoginView> {
               obscureText: true,
               onChanged: (value) => viewModel.password = value,
               validator: (value) =>
-                  value.length > 6 ? null : "sixCharter".locale,
+              value.length > 6 ? null : "sixCharter".locale,
             ),
             SpaceSeperator(),
             FatButton(
@@ -115,10 +116,16 @@ class _LoginViewState extends State<LoginView> {
                   //     prefs.getBool("isLoggedIn").toString());
                   String id = await viewModel.firebaseLogin();
                   print(id);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DetailView()),
-                  );
+                  if (id == null)
+                    showErrorDialog();
+                  else {
+                    User.userId = id;
+                    print(id);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DetailView()),
+                    );
+                  }
                 } else {
                   viewModel.validationChange(true);
                 }
@@ -137,5 +144,18 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  Future<void> showErrorDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          Future.delayed(Duration(milliseconds: 700), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            title: Text('HATALI GİRİŞ!'),
+          );
+        });
   }
 }

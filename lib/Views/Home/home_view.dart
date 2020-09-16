@@ -1,7 +1,6 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
