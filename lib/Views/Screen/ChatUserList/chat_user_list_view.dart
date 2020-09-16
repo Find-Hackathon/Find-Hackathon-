@@ -31,9 +31,33 @@ class _ChatUserListState extends State<ChatUserListView> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: buildAppBar(context),
+      appBar: appBar(context), //buildAppBar(context),
       body: buildUserList(),
     ));
+  }
+
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      titleSpacing: 24.0,
+      actionsIconTheme: IconThemeData(color: Colors.black),
+      centerTitle: false,
+      title: Text(
+        'Hackathons',
+        style: Theme.of(context)
+            .textTheme
+            .headline6
+            .copyWith(fontWeight: FontWeight.w600, fontSize: 22.0),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () {},
+          ),
+        )
+      ],
+    );
   }
 
   ListView buildUserList() {
@@ -73,8 +97,7 @@ class _ChatUserListState extends State<ChatUserListView> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      toolbarHeight:
-          MediaQuery.of(context).size.height * context.constMediumValue / 100,
+      toolbarHeight: MediaQuery.of(context).size.height * 0.15,
       title: Container(
           padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
           child: SearchTextField(size: MediaQuery.of(context).size)),
