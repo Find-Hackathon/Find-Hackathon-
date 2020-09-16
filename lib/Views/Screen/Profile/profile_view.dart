@@ -73,9 +73,7 @@ class ProfileView extends ProfileViewModel {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              item.imageUrl,
-            ),
+            image: NetworkImage(item.imageUrl),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black12,
@@ -95,9 +93,10 @@ class ProfileView extends ProfileViewModel {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(10),
               child: Container(
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -109,7 +108,7 @@ class ProfileView extends ProfileViewModel {
                   style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
