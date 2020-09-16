@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
 
 import 'chat_user_list_view_model.dart';
 
@@ -23,14 +22,6 @@ class _ChatUserListState extends State<ChatUserListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-<<<<<<< Updated upstream
-      child: Scaffold(
-        body: Container(
-          child: Column(),
-        ),
-      ),
-    );
-=======
         child: Scaffold(
       body: new ListView.builder(
         itemCount: users.length,
@@ -45,6 +36,5 @@ class _ChatUserListState extends State<ChatUserListView> {
         },
       ),
     ));
->>>>>>> Stashed changes
   }
 }
