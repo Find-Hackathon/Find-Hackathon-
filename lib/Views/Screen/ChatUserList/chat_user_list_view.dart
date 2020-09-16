@@ -55,7 +55,6 @@ class _ChatUserListState extends State<ChatUserListView> {
                       Text(newFormat.format(users[index].getLastMessageTime())),
                 )),
           );
-          return buildUsersContainer(index);
         },
       ),
     ));

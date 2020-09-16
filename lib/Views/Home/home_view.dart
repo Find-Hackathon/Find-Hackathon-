@@ -52,45 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           SizedBox(height: 10.0),
-          searchTextFieldRow(size),
           SearchTextField(size: MediaQuery.of(context).size),
           SizedBox(height: 10.0),
           ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList(),
         ],
       ),
-    );
-  }
-
-  Row searchTextFieldRow(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: size.width * 0.86,
-          child: TextField(
-            style: TextStyle(
-              color: AppColors.kGreen,
-              fontWeight: FontWeight.bold,
-            ),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30.0),
-                ),
-              ),
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: Icon(Icons.close),
-              hintText: "Search",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 

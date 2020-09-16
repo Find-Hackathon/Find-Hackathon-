@@ -17,7 +17,6 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = TextEditingController();
-    var size = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
