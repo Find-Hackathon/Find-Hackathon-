@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ChatUserList extends StatefulWidget {
@@ -11,7 +12,11 @@ class _ChatUserListState extends State<ChatUserList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Placeholder(),
+      child: Scaffold(
+        body: Container(
+          child: Column(),
+        ),
+      ),
     );
   }
 }
