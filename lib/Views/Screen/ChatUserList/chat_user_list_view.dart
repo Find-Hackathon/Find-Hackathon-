@@ -114,11 +114,17 @@ class _ChatUserListState extends State<ChatUserListView> {
                 child: Image.asset(users[index].getUserProfilePicture()),
               ),
             ),
-            title: Text(users[index].getUserName()),
+            title: Text(
+              users[index].getUserName(),
+              style: context.textTheme.headline5,
+            ),
             subtitle: Row(
               children: [
                 Icon(Icons.check),
-                Text(users[index].getLastMessage()),
+                Text(
+                  users[index].getLastMessage(),
+                  style: context.textTheme.bodyText2,
+                ),
               ],
             ),
             trailing: Text(newFormat.format(users[index].getLastMessageTime())),
