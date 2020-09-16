@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       navigatorKey: NavigatorService.instance.navigatorKey,
       theme: Provider.of<ThemeProvider>(context).getTheme,
-      home: ChatUserListView(),
       home: SplashScreen(),
     );
   }

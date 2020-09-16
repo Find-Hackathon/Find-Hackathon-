@@ -31,11 +31,6 @@ class _ChatUserListState extends State<ChatUserListView> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: AppBar(
-        title: Container(
-            margin: EdgeInsets.symmetric(vertical: context.constHighValue),
-            child: SearchTextField()),
-      ),
       appBar: buildAppBar(context),
       body: new ListView.builder(
         itemCount: users.length,
@@ -70,10 +65,8 @@ class _ChatUserListState extends State<ChatUserListView> {
     return AppBar(
       backgroundColor: Colors.transparent,
       toolbarHeight:
-          MediaQuery.of(context).size.height * context.constMediumValue / 130,
           MediaQuery.of(context).size.height * context.constMediumValue / 100,
       title: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
           padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
           child: SearchTextField(size: MediaQuery.of(context).size)),
     );
