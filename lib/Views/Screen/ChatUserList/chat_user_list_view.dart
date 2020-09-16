@@ -71,8 +71,10 @@ class _ChatUserListState extends State<ChatUserListView> {
       backgroundColor: Colors.transparent,
       toolbarHeight:
           MediaQuery.of(context).size.height * context.constMediumValue / 130,
+          MediaQuery.of(context).size.height * context.constMediumValue / 100,
       title: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0),
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
           child: SearchTextField(size: MediaQuery.of(context).size)),
     );
   }
