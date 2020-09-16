@@ -32,32 +32,42 @@ class _ChatUserListState extends State<ChatUserListView> {
     return Container(
         child: Scaffold(
       appBar: buildAppBar(context),
-      body: new ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: new Card(
-                color: Colors.white,
-                child: ListTile(
-                  leading: Container(
-                    child: CircleAvatar(
-                      child: Image.asset(users[index].getUserProfilePicture()),
-                    ),
-                  ),
-                  title: Text(users[index].getUserName()),
-                  subtitle: Row(
-                    children: [
-                      Icon(Icons.check),
-                      Text(users[index].getLastMessage()),
-                    ],
-                  ),
-                  trailing:
-                      Text(newFormat.format(users[index].getLastMessageTime())),
-                )),
-          );
-        },
-      ),
+      body: buildUserList(),
     ));
+  }
+
+  ListView buildUserList() {
+    return new ListView.builder(
+      itemCount: users.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          child: new Card(
+              color: Colors.white,
+              child: ListTile(
+                leading: Container(
+                  child: CircleAvatar(
+                    child: Image.asset(users[index].getUserProfilePicture()),
+                  ),
+                ),
+                title: Text(
+                  users[index].getUserName(),
+                  style: context.textTheme.bodyText1,
+                ),
+                subtitle: Row(
+                  children: [
+                    Icon(Icons.check),
+                    Text(users[index].getLastMessage(),
+                        style: context.textTheme.subtitle2),
+                  ],
+                ),
+                trailing: Text(
+                  newFormat.format(users[index].getLastMessageTime()),
+                  style: context.textTheme.subtitle2,
+                ),
+              )),
+        );
+      },
+    );
   }
 
   AppBar buildAppBar(BuildContext context) {
