@@ -106,7 +106,7 @@ class SliderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: context.theme.backgroundColor,
       child: Container(
         child: Column(
           children: <Widget>[

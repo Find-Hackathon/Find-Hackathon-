@@ -19,9 +19,9 @@ class FatButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.constHighValue),
-          gradient: customLinearGradient(context.theme.primaryColor),
+          gradient: customLinearGradient(Color(0xFF56C596)),
           boxShadow: [
-            buildBoxShadow(context.theme.primaryColor),
+            buildBoxShadow(Color(0xFF56C596)),
           ]),
       child: FlatButton(
         onPressed: onPressed,
@@ -29,8 +29,7 @@ class FatButton extends StatelessWidget {
           padding: EdgeInsets.all(context.constMediumValue),
           child: Text(
             text.locale,
-            style: context.textTheme.headline6
-                .copyWith(color: context.theme.backgroundColor),
+            style: context.textTheme.headline6.copyWith(color: Colors.white),
           ),
         ),
       ),
