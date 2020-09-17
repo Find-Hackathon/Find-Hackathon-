@@ -1,3 +1,4 @@
+import 'package:FindHackathon/Views/Screen/Chat/chat_screen.dart';
 import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -70,6 +71,10 @@ class _ChatUserListState extends State<ChatUserListView> {
           child: new Card(
               color: Colors.white,
               child: ListTile(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ChatPage()));
+                },
                 leading: Container(
                   child: CircleAvatar(
                     child: Image.asset(users[index].getUserProfilePicture()),

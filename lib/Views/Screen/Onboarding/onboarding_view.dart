@@ -115,13 +115,7 @@ class SliderTile extends StatelessWidget {
             ),
             Image.asset(assetPath),
             Spacer(
-              flex: 25,
-            ),
-            Spacer(
-              flex: 5,
-            ),
-            Spacer(
-              flex: 20,
+              flex: 50,
             ),
             buildTitle(title, context),
             Spacer(
