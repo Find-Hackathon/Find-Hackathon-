@@ -1,5 +1,6 @@
-import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Core/Extension/context_extension.dart';
@@ -10,11 +11,11 @@ class ChatPage extends StatefulWidget {
   String gorupName;
   final String conversationId;
   final String userId;
-  final String conversationName;
+  final Conversation conversation;
 
   // ChatPage({Key key, this.groupId, this.userName, this.gorupName})
   //     : super(key: key);
-  ChatPage({Key key, this.userId, this.conversationId, this.conversationName})
+  ChatPage({Key key, this.userId, this.conversationId, this.conversation})
       : super(key: key);
 
   @override
@@ -25,13 +26,12 @@ class _ChatPageState extends State<ChatPage> {
   CollectionReference ref;
   final TextEditingController textEditingController = TextEditingController();
   String hackathonName;
-
   @override
   void initState() {
     ref = FirebaseFirestore.instance
         .collection('conversations/${widget.conversationId}/messages');
     print(widget.userId);
-    hackathonName = widget.conversationName;
+    hackathonName = widget.conversation.name;
     print("hackathonname : " + hackathonName);
     super.initState();
   }
@@ -55,12 +55,18 @@ class _ChatPageState extends State<ChatPage> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios),
-        onPressed: () {
-          Navigator.pop(
-              context, MaterialPageRoute(builder: (context) => DetailView()));
-        },
+      leading:
+          // IconButton(
+          //   icon: Icon(Icons.arrow_back_ios),
+          //   onPressed: () {
+          //     Navigator.pop(
+          //         context, MaterialPageRoute(builder: (context) => DetailView()));
+          //   },
+          // ),
+          Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+            backgroundImage: NetworkImage(widget.conversation.profileImage)),
       ),
       actions: [
         InkWell(
@@ -97,26 +103,37 @@ class _ChatPageState extends State<ChatPage> {
   ListTile buildListTile(document, BuildContext context) {
     return ListTile(
       title: Align(
-        alignment: widget.userId != document.get('senderId')
-            ? Alignment.centerLeft
-            : Alignment.centerRight,
-        child: Container(
-          padding: EdgeInsets.all(context.constMediumValue),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(context.constHighValue),
-            color: Theme.of(context).primaryColor,
-          ),
-          child: Text(
-            document.get('message'),
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
+          alignment: widget.userId != document.get('senderId')
+              ? Alignment.centerLeft
+              : Alignment.centerRight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.all(context.constMediumValue),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(context.constHighValue),
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
+                ),
+                child: Text(
+                  document.get('message'),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Text(
+                document.get('timeStamp').toDate().toString(),
+                style: TextStyle(color: CupertinoColors.inactiveGray),
+              )
+            ],
+          )
+
       ),
     );
   }
-
   Padding buildPaddingMessageBox(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(context.constMediumValue),

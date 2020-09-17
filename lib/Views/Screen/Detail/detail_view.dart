@@ -21,7 +21,7 @@ class _DetailViewState extends State<DetailView> {
     super.initState();
 
     FirebaseFirestore.instance.collection('chat').snapshots().listen(
-            (event) => event.docs.forEach((element) => print(element.get('name'))));
+        (event) => event.docs.forEach((element) => print(element.get('name'))));
   }
 
   @override
@@ -46,21 +46,50 @@ class _DetailViewState extends State<DetailView> {
             return ListView(
               children: snapshot.data
                   .map((doc) => ListTile(
-                        leading: CircleAvatar(
-                            backgroundImage: NetworkImage(doc.profileImage)),
-                        title: Text(doc.name),
-                        subtitle: Text(doc.displayMessage),
-                        //trailing: Text(),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatPage(
-                                    userId: User.userId,
-                                    conversationId: doc.id,
-                                    conversationName: doc.name)),
-                          );
-                        },
+                leading: CircleAvatar(
+                    backgroundImage: NetworkImage(doc.profileImage)),
+                title: Text(doc.name),
+                subtitle: Text(doc.displayMessage),
+                trailing: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () async {
+                    DocumentReference docRef = FirebaseFirestore
+                        .instance
+                        .collection('conversations')
+                        .doc(doc.id);
+                    DocumentSnapshot docSnapshot = await docRef.get();
+                    List members = docSnapshot.data()['members'];
+                    members.map((e) {
+                      if (e == User.userId)
+                        print("already have");
+                      else
+                        docRef.update({
+                          'members': FieldValue.arrayUnion([User.userId])
+                        });
+                    }).toList();
+
+                    // CollectionReference ref = FirebaseFirestore.instance
+                    //     .collection('conversations');
+                    // Map<String,dynamic> demoData = {
+                    //   "members" : "keyvalue"
+                    // };
+                    // ref.add(demoData);
+                    // QuerySnapshot querySnapshot = await ref.get();
+                    // querySnapshot.docs[0].reference
+                    //     .update({"displayMessage": "lastMessage"});
+                  },
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ChatPage(
+                                userId: User.userId,
+                                conversationId: doc.id,
+                                conversation: doc)),
+                  );
+                },
                       ))
                   .toList(),
             );
