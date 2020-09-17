@@ -1,6 +1,6 @@
 import 'package:FindHackathon/Core/Components/lottie_file.dart';
 import 'package:FindHackathon/Core/Constants/App/app_lottie.dart';
-import 'package:FindHackathon/Views/Screen/Login/login_view.dart';
+import 'package:FindHackathon/Core/Model/user_model.dart';
 import 'package:FindHackathon/Views/Screen/Register/register_view_model.dart';
 import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
 import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
@@ -21,6 +21,7 @@ class RegisterView extends StatefulWidget {
 class _LoginViewState extends State<RegisterView> {
   RegisterViewModel viewModel;
   SharedPreferences prefs;
+  Future<UserModel> futureUserModel;
 
   @override
   void initState() {
@@ -116,18 +117,37 @@ class _LoginViewState extends State<RegisterView> {
             SpaceSeperator(),
             FatButton(
               text: "signin".locale,
-              onPressed: () {
+              onPressed: () async {
                 if (viewModel.formKey.currentState.validate()) {
-                  viewModel.firebaseUserCreate();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginView()),
-                  );
+                  String id = await viewModel.firebaseUserCreate();
+                  UserModel userModel =
+                      new UserModel(id, viewModel.name, 'image', 'data');
+                  print("id : $id");
+                  futureUserModel = viewModel.addUser(userModel);
+                  // print("userId:" + id.toString());
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => LoginView()),
+                  // );
                 } else {
                   viewModel.validationChange(true);
                 }
               },
             ),
+            Container(
+              child: FutureBuilder<UserModel>(
+                future: futureUserModel,
+                builder: (context, snapshot) {
+                  print("snapshot:" + snapshot.data.toString());
+                  if (snapshot.hasData) {
+                    return Text(snapshot.data.id);
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator();
+                },
+              ),
+            )
           ],
         ),
       ),
