@@ -28,7 +28,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-    // getSharedPreferences();
+    getSharedPreferences();
   }
 
   @override
@@ -40,14 +40,14 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  // getSharedPreferences() async {
-  //   prefs = await SharedPreferences.getInstance();
-  //   if (prefs.getBool("isLoggedIn"))
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => DetailView()),
-  //     );
-  // }
+  getSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // if (prefs.getBool("isLoggedIn"))
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => ChatPage()),
+    //   );
+  }
 
   Widget buildLoginForm() {
     return SingleChildScrollView(
@@ -106,20 +106,21 @@ class _LoginViewState extends State<LoginView> {
                   // print(viewModel.email + "   " + viewModel.password);
 
                   //LocaleManager.instance.setStringValue("email",viewModel.email);
-                  // prefs.setString("email", viewModel.email);
+                  prefs.setString("email", viewModel.email);
                   // //LocaleManager.instance.setStringValue("email",viewModel.password);
-                  // prefs.setString("password", viewModel.password);
+                  prefs.setString("password", viewModel.password);
                   // //LocaleManager.instance.setIsLoggedIn(state)
-                  // prefs.setBool("isLoggedIn", true);
+                  prefs.setBool("isLoggedIn", true);
                   //
-                  // print("is Logged in : " +
-                  //     prefs.getBool("isLoggedIn").toString());
+                  print("is Logged in : " +
+                      prefs.getBool("isLoggedIn").toString());
                   String id = await viewModel.firebaseLogin();
                   print(id);
                   if (id == null)
                     showErrorDialog();
                   else {
                     User.userId = id;
+                    prefs.setString("id", id);
                     print(id);
                     Navigator.push(
                       context,

@@ -15,8 +15,6 @@ class ChatPage extends StatefulWidget {
   final String userId;
   final Conversation conversation;
 
-  // ChatPage({Key key, this.groupId, this.userName, this.gorupName})
-  //     : super(key: key);
   ChatPage({Key key, this.userId, this.conversationId, this.conversation})
       : super(key: key);
 
@@ -47,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
         body: Container(
           child: Column(
             children: <Widget>[
-              buildExpandedMessageScreen(),
+              buildExpandedMessageScreen(context),
               buildPaddingMessageBox(context),
             ],
           ),
@@ -87,7 +85,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Expanded buildExpandedMessageScreen() {
+  Expanded buildExpandedMessageScreen(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
           stream: ref.orderBy('timeStamp', descending: true).snapshots(),
@@ -104,14 +102,11 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  // checkColor() {
-  //
-  // }
-
   ListTile buildListTile(document, BuildContext context) {
     Color color;
     Color textColor;
     if (widget.userId != document.get('senderId')) {
+      // color = context.theme.primaryColor;
       color = Color(0xffcff4d2).withOpacity(0.5);
       // color = Theme.of(context).primaryColor.withOpacity(0.5);
       textColor = Colors.black;
@@ -177,21 +172,24 @@ class _ChatPageState extends State<ChatPage> {
     return updatedDt; // 20-04-03
   }
 
-  Padding buildPaddingMessageBox(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.all(context.constMediumValue),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.all(5),
-                decoration: buildBoxDecoration(),
-                child: buildRowChatField(),
+  Container buildPaddingMessageBox(BuildContext context) {
+    return Container(
+      // color: context.theme.primaryColor,
+      child: Padding(
+          padding: EdgeInsets.all(context.constMediumValue),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  decoration: buildBoxDecoration(),
+                  child: buildRowChatField(),
+                ),
               ),
-            ),
-            buildContainerSendMessage()
-          ],
-        ));
+              buildContainerSendMessage()
+            ],
+          )),
+    );
   }
 
   Row buildRowChatField() {
@@ -204,7 +202,7 @@ class _ChatPageState extends State<ChatPage> {
           child: TextField(
               controller: textEditingController,
               decoration: InputDecoration(
-                  hintText: "Type a message", border: InputBorder.none)),
+                  hintText: "Bir mesaj yaz", border: InputBorder.none)),
         ),
       ],
     );
