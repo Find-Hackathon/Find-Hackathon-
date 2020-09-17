@@ -43,16 +43,15 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
-      body: Container(
-        child: Column(
-          children: <Widget>[
+        appBar: buildAppBar(),
+        body: Container(
+          child: Column(
+            children: <Widget>[
               buildExpandedMessageScreen(),
               buildPaddingMessageBox(context),
             ],
-        ),
-      )
-    );
+          ),
+        ));
   }
 
   AppBar buildAppBar() {
@@ -96,11 +95,11 @@ class _ChatPageState extends State<ChatPage> {
             return !snapshot.hasData
                 ? CircularProgressIndicator()
                 : ListView(
-                reverse: true,
-                shrinkWrap: true,
-                children: snapshot.data.docs
-                    .map((document) => buildListTile(document, context))
-                    .toList());
+                    reverse: true,
+                    shrinkWrap: true,
+                    children: snapshot.data.docs
+                        .map((document) => buildListTile(document, context))
+                        .toList());
           }),
     );
   }
@@ -116,8 +115,7 @@ class _ChatPageState extends State<ChatPage> {
       color = Color(0xffcff4d2).withOpacity(0.5);
       // color = Theme.of(context).primaryColor.withOpacity(0.5);
       textColor = Colors.black;
-    }
-    else {
+    } else {
       color = Color(0xFF56C596);
       textColor = Colors.white;
     }
@@ -148,9 +146,11 @@ class _ChatPageState extends State<ChatPage> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: EdgeInsets.all(context.constMediumValue),
+                padding: EdgeInsets.fromLTRB(
+                    context.constMediumValue, context.constLowValue,
+                    context.constMediumValue, context.constLowValue),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(context.constHighValue),
+                  borderRadius: BorderRadius.circular(context.constMediumValue),
                   color: color,
                 ),
                 child: Text(
@@ -179,30 +179,72 @@ class _ChatPageState extends State<ChatPage> {
 
   Padding buildPaddingMessageBox(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(context.constMediumValue),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.constHighValue,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(context.constHighValue),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  buildInkWellEmojiIcons(),
-                  buildExpandedWriteConsoleMessage(),
-                  buildIconButtonSendMessage(),
-                ],
+        padding: EdgeInsets.all(context.constMediumValue),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(5),
+                decoration: buildBoxDecoration(),
+                child: buildRowChatField(),
               ),
             ),
+            buildContainerSendMessage()
+          ],
+        ));
+  }
+
+  Row buildRowChatField() {
+    return Row(
+      children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: buildInkWellEmojiIcons()),
+        Expanded(
+          child: TextField(
+              controller: textEditingController,
+              decoration: InputDecoration(
+                  hintText: "Type a message", border: InputBorder.none)),
+        ),
+      ],
+    );
+  }
+
+  BoxDecoration buildBoxDecoration() {
+    return BoxDecoration(
+      border: Border.all(color: Color(0xFF56C596), width: 1.5),
+      color: Colors.white,
+      borderRadius: BorderRadius.horizontal(
+        left: Radius.circular(20),
+        right: Radius.circular(20),
+      ),
+    );
+  }
+
+  buildContainerSendMessage() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      child: Container(
+        margin: EdgeInsets.only(right: 5),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFF56C596),
+        ),
+        child: IconButton(
+          icon: Icon(
+            Icons.send,
+            color: Colors.white,
           ),
-        ],
+          onPressed: () async {
+            await ref.add({
+              'senderId': widget.userId,
+              'message': textEditingController.text,
+              'timeStamp': DateTime.now()
+            });
+
+            textEditingController.text = '';
+          },
+        ),
       ),
     );
   }
@@ -211,19 +253,7 @@ class _ChatPageState extends State<ChatPage> {
     return InkWell(
       child: Icon(
         Icons.tag_faces,
-        color: Colors.grey[900],
-      ),
-    );
-  }
-
-  Expanded buildExpandedWriteConsoleMessage() {
-    return Expanded(
-      child: TextField(
-        controller: textEditingController,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: " Yazınızı yazın.",
-        ),
+        color: Colors.grey,
       ),
     );
   }
