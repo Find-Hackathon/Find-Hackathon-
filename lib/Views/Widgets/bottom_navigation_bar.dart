@@ -1,6 +1,9 @@
+import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Home/home_view.dart';
 import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
 import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_view.dart';
+import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_view_model.dart';
+import 'package:FindHackathon/Views/Screen/Participants/participants_view.dart';
 import 'package:flutter/material.dart';
 
 /// This Widget is the main application widget.
@@ -9,8 +12,9 @@ class NavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MyStatefulWidget(),
+    return MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
     );
   }
 }
