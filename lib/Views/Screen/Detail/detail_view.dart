@@ -1,6 +1,7 @@
 import 'package:FindHackathon/Core/Service/Network/ChatsModel.dart';
 import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
 import 'package:FindHackathon/Views/Screen/Chat/chat_screen.dart';
+import 'package:FindHackathon/Views/Screen/Detail/Service/chat_service.dart';
 import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,12 +18,14 @@ class DetailView extends StatefulWidget {
 }
 
 class _DetailViewState extends State<DetailView> {
+  ChatService service;
   @override
   void initState() {
     super.initState();
 
     FirebaseFirestore.instance.collection('chat').snapshots().listen(
         (event) => event.docs.forEach((element) => print(element.get('name'))));
+    service = ChatService();
   }
 
   @override
@@ -113,11 +116,9 @@ class _DetailViewState extends State<DetailView> {
   Future<bool> backpressed() async {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => NavigationBar()),
+      MaterialPageRoute(builder: (context) => NavigationBar()),
     );
   }
-
 
 // return Container(
 //     child: FutureBuilder(
