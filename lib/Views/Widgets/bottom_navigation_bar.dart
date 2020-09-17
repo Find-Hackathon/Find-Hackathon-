@@ -6,19 +6,6 @@ import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_v
 import 'package:FindHackathon/Views/Screen/Participants/participants_view.dart';
 import 'package:flutter/material.dart';
 
-/// This Widget is the main application widget.
-class NavigationBar extends StatelessWidget {
-  static const String _title = 'Flutter Code Sample';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
