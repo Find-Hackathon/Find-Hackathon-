@@ -38,15 +38,17 @@ class _ChatUserListState extends State<ChatUserListView> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
       titleSpacing: 24.0,
-      actionsIconTheme: IconThemeData(color: Colors.black),
+      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
       centerTitle: false,
       title: Text(
-        'Hackathons',
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            .copyWith(fontWeight: FontWeight.w600, fontSize: 22.0),
+        'Chats',
+        style: Theme.of(context).textTheme.headline6.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 22.0,
+            color: Color(0xFF56C596)),
       ),
       actions: [
         Padding(
