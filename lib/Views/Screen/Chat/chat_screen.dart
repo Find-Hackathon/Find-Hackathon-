@@ -28,6 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   CollectionReference ref;
   final TextEditingController textEditingController = TextEditingController();
   String hackathonName;
+  ScrollController _scrollController = new ScrollController();
 
   @override
   void initState() {
@@ -35,23 +36,22 @@ class _ChatPageState extends State<ChatPage> {
         .collection('conversations/${widget.conversationId}/messages');
     print(widget.userId);
     hackathonName = widget.conversation.name;
-    print("hackathonname : " + hackathonName);
+    print("hackathonName : " + hackathonName);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: false,
       appBar: buildAppBar(),
       body: Container(
         child: Column(
-          children: [
-            buildExpandedMessageScreen(),
-            buildPaddingMessageBox(context),
-          ],
+          children: <Widget>[
+              buildExpandedMessageScreen(),
+              buildPaddingMessageBox(context),
+            ],
         ),
-      ),
+      )
     );
   }
 
@@ -91,11 +91,13 @@ class _ChatPageState extends State<ChatPage> {
   Expanded buildExpandedMessageScreen() {
     return Expanded(
       child: StreamBuilder(
-          stream: ref.orderBy('timeStamp').snapshots(),
+          stream: ref.orderBy('timeStamp', descending: true).snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             return !snapshot.hasData
                 ? CircularProgressIndicator()
                 : ListView(
+                reverse: true,
+                shrinkWrap: true,
                 children: snapshot.data.docs
                     .map((document) => buildListTile(document, context))
                     .toList());
@@ -103,9 +105,9 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  checkColor() {
-
-  }
+  // checkColor() {
+  //
+  // }
 
   ListTile buildListTile(document, BuildContext context) {
     Color color;
@@ -119,6 +121,23 @@ class _ChatPageState extends State<ChatPage> {
       color = Color(0xFF56C596);
       textColor = Colors.white;
     }
+    // return ListTile(
+    //   title: Align(
+    //       alignment: widget.userId != document.get('senderId')
+    //           ? Alignment.centerLeft
+    //           : Alignment.centerRight,
+    //       child: Container(
+    //           padding: EdgeInsets.all(8),
+    //           decoration: BoxDecoration(
+    //               color: Theme.of(context).primaryColor,
+    //               borderRadius: BorderRadius.horizontal(
+    //                   left: Radius.circular(10),
+    //                   right: Radius.circular(10))),
+    //           child: Text(
+    //             document.get('message'),
+    //             style: TextStyle(color: Colors.white),
+    //           ))),
+    // );
 
     return ListTile(
       title: Align(
@@ -163,7 +182,7 @@ class _ChatPageState extends State<ChatPage> {
       padding: EdgeInsets.all(context.constMediumValue),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -221,7 +240,7 @@ class _ChatPageState extends State<ChatPage> {
           "message": textEditingController.text,
           "timeStamp": DateTime.now()
         });
-        textEditingController.text = "";
+        textEditingController.clear();
       },
     );
   }
