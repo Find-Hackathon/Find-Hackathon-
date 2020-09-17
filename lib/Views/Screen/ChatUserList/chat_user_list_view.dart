@@ -1,8 +1,8 @@
-import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import '../../../Core/Extension/context_extension.dart';
 import 'chat_user_list_view_model.dart';
 
@@ -15,13 +15,12 @@ class ChatUserListView extends StatefulWidget {
 
 class _ChatUserListState extends State<ChatUserListView> {
   List<ChatUserModel> users;
-
   Size size;
   var newFormat;
   String updatedDt;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     users = mockUsers();
     newFormat = DateFormat("jm");

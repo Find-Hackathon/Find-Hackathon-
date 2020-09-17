@@ -10,10 +10,12 @@ class ChatPage extends StatefulWidget {
   String gorupName;
   final String conversationId;
   final String userId;
+  final String conversationName;
 
   // ChatPage({Key key, this.groupId, this.userName, this.gorupName})
   //     : super(key: key);
-  ChatPage({Key key, this.userId, this.conversationId}) : super(key: key);
+  ChatPage({Key key, this.userId, this.conversationId, this.conversationName})
+      : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -22,12 +24,15 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   CollectionReference ref;
   final TextEditingController textEditingController = TextEditingController();
+  String hackathonName;
 
   @override
   void initState() {
     ref = FirebaseFirestore.instance
         .collection('conversations/${widget.conversationId}/messages');
     print(widget.userId);
+    hackathonName = widget.conversationName;
+    print("hackathonname : " + hackathonName);
     super.initState();
   }
 
@@ -66,7 +71,7 @@ class _ChatPageState extends State<ChatPage> {
       centerTitle: true,
       elevation: 0,
       title: Text(
-        "Hackathon Grup Name",
+        hackathonName,
         style: TextStyle(
           color: Colors.green,
         ),

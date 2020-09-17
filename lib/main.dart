@@ -1,6 +1,4 @@
-import 'package:FindHackathon/Views/Home/home_view.dart';
-import 'package:FindHackathon/Views/Screen/ChatUserList/chat_user_list_view.dart';
-import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
+import 'package:FindHackathon/Core/Service/Network/Locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +11,7 @@ import 'Core/Service/Navigation/navigation_service.dart';
 import 'Views/Screen/Splash/splash_view.dart';
 
 void main() async {
+  setupLocators();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(

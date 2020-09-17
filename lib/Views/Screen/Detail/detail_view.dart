@@ -1,8 +1,12 @@
+import 'package:FindHackathon/Core/Service/Network/ChatsModel.dart';
+import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
 import 'package:FindHackathon/Views/Screen/Chat/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 import '../../User.dart';
 
@@ -17,54 +21,54 @@ class _DetailViewState extends State<DetailView> {
     super.initState();
 
     FirebaseFirestore.instance.collection('chat').snapshots().listen(
-        (event) => event.docs.forEach((element) => print(element.get('name'))));
+            (event) => event.docs.forEach((element) => print(element.get('name'))));
   }
 
   @override
   Widget build(BuildContext context) {
+    var model = GetIt.instance<ChatsModel>();
+
     return Scaffold(
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('conversations')
-        //.where('members', arrayContains: User.userId)
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+      body: ChangeNotifierProvider(
+        create: (BuildContext context) => model,
+        child: StreamBuilder<List<Conversation>>(
+          stream: model.conversations(User.userId),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<Conversation>> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
-          }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Loading...');
+            }
 
-
-          return ListView(
-            children: snapshot.data.docs
-                .map((doc) =>
-                ListTile(
-                  leading: CircleAvatar(
-                      backgroundImage: NetworkImage(doc.get("hackathonImage"))),
-                  title: Text('title'),
-                  subtitle: Text(doc.get('displayMessage')),
-                  //trailing: Text(doc.get("time")),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          ChatPage(
-                            userId: User.userId,
-                            conversationId: doc.id,
-                          )),
-                    );
-                  },
-                ))
-                .toList(),
-          );
-        },
+            return ListView(
+              children: snapshot.data
+                  .map((doc) => ListTile(
+                        leading: CircleAvatar(
+                            backgroundImage: NetworkImage(doc.profileImage)),
+                        title: Text(doc.name),
+                        subtitle: Text(doc.displayMessage),
+                        //trailing: Text(),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatPage(
+                                    userId: User.userId,
+                                    conversationId: doc.id,
+                                    conversationName: doc.name)),
+                          );
+                        },
+                      ))
+                  .toList(),
+            );
+          },
+        ),
       ),
     );
   }
-
 
   Future<DocumentSnapshot> getData() async {
     await Firebase.initializeApp();
