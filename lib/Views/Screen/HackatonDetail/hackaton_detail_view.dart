@@ -2,6 +2,7 @@ import 'dart:ui' show Radius;
 
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view_model.dart';
+import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:FindHackathon/Views/Widgets/fat_button.dart';
 import 'package:FindHackathon/Views/Widgets/star_display.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,14 @@ class _HackatonDetailState extends State<HackatonDetail> {
       backgroundColor: Colors.white,
       actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
       centerTitle: false,
+      leading: IconButton(
+          icon: IconButton(
+        icon: Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          Navigator.pop(context,
+              MaterialPageRoute(builder: (context) => NavigationBar()));
+        },
+      )),
       title: Text(
         'Hackathon Detayları',
         style: Theme.of(context).textTheme.headline6.copyWith(
