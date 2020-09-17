@@ -65,7 +65,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
               width: slideIndex == 0 ? 50 : 10,
               height: 10,
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: context.theme.primaryColor,
                   borderRadius: BorderRadius.circular(10))),
           AnimatedContainer(
               margin: EdgeInsets.symmetric(horizontal: 5),
@@ -73,7 +73,7 @@ class _OnboardingHomeState extends State<OnboardingHome> {
               width: slideIndex == 1 ? 50 : 10,
               height: 10,
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: context.theme.primaryColor,
                   borderRadius: BorderRadius.circular(10))),
           AnimatedContainer(
               margin: EdgeInsets.symmetric(horizontal: 5),
@@ -81,7 +81,9 @@ class _OnboardingHomeState extends State<OnboardingHome> {
               width: slideIndex == 2 ? 50 : 10,
               height: 10,
               decoration: BoxDecoration(
-                  color: Colors.green, borderRadius: BorderRadius.circular(10)))
+                color: context.theme.primaryColor,
+                borderRadius: BorderRadius.circular(10),
+              ))
         ],
       ),
     );
@@ -113,13 +115,7 @@ class SliderTile extends StatelessWidget {
             ),
             Image.asset(assetPath),
             Spacer(
-              flex: 25,
-            ),
-            Spacer(
-              flex: 5,
-            ),
-            Spacer(
-              flex: 20,
+              flex: 50,
             ),
             buildTitle(title, context),
             Spacer(
@@ -158,10 +154,11 @@ class SliderTile extends StatelessWidget {
   }
 
   Text buildTitle(String title, BuildContext context) {
-    return Text(
-      title,
-      textAlign: TextAlign.center,
-      style: context.textTheme.headline5,
-    );
+    return Text(title,
+        textAlign: TextAlign.center,
+        style: context.textTheme.headline5.copyWith(
+          fontWeight: FontWeight.bold,
+          color: context.theme.primaryColor,
+        ));
   }
 }

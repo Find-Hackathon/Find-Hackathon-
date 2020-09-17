@@ -97,6 +97,7 @@ class _PartipicantsViewState extends State<PartipicantsView> {
             color: Colors.amber,
           ),
           child: StarRating(
+            size: 30,
             value: 4,
           ),
         ),
