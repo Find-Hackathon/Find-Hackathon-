@@ -1,6 +1,7 @@
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Home/home_view.dart';
 import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:FindHackathon/Views/Screen/Participants/participants_view.dart';
 import 'package:flutter/material.dart';
 
 /// This Widget is the main application widget.
@@ -26,7 +27,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -72,7 +73,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       radius: 0.5,
                       colors: [Color(0xFF7BE495), Color(0xFF329D9C)])),
               child: Icon(Icons.add)),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PartipicantsView()));
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
