@@ -1,12 +1,14 @@
-import '../../../Core/Extension/context_extension.dart';
-import '../Welcome/WelcomeScreen.dart';
-import '../../Widgets/fat_button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Core/Extension/context_extension.dart';
+import '../../Widgets/fat_button.dart';
+import '../Welcome/WelcomeScreen.dart';
 import 'onboarding_view_model.dart';
 
 class OnboardingHome extends StatefulWidget {
   OnboardingHome({Key key}) : super(key: key);
+  SharedPreferences prefs;
 
   @override
   _OnboardingHomeState createState() => _OnboardingHomeState();
@@ -95,13 +97,12 @@ class SliderTile extends StatelessWidget {
   final int index, itemCount;
   final int slideIndex;
 
-  SliderTile(
-      {this.assetPath,
-      this.title,
-      this.desc,
-      this.index,
-      this.itemCount,
-      this.slideIndex});
+  SliderTile({this.assetPath,
+    this.title,
+    this.desc,
+    this.index,
+    this.itemCount,
+    this.slideIndex});
 
   @override
   Widget build(BuildContext context) {
