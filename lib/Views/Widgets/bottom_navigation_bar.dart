@@ -1,6 +1,8 @@
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Home/home_view.dart';
 import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_view.dart';
+import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_view_model.dart';
 import 'package:FindHackathon/Views/Screen/Participants/participants_view.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +77,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: Icon(Icons.add)),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PartipicantsView()));
+                MaterialPageRoute(builder: (context) => HackathonUpload()));
           },
         ),
       ),

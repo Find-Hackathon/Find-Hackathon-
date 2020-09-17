@@ -1,3 +1,4 @@
+import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,14 +9,14 @@ import '../../../Core/Extension/context_extension.dart';
 import '../../Widgets/fat_button.dart';
 import '../../Widgets/space_seperator.dart';
 
-class HacathonUpload extends StatefulWidget {
-  HacathonUpload({Key key}) : super(key: key);
+class HackathonUpload extends StatefulWidget {
+  HackathonUpload({Key key}) : super(key: key);
 
   @override
-  _HacathonUploadState createState() => _HacathonUploadState();
+  _HackathonUploadState createState() => _HackathonUploadState();
 }
 
-class _HacathonUploadState extends State<HacathonUpload> {
+class _HackathonUploadState extends State<HackathonUpload> {
   File _image;
 
   @override
@@ -120,15 +121,21 @@ class _HacathonUploadState extends State<HacathonUpload> {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios),
-        onPressed: () {},
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          Navigator.pop(context,
+              MaterialPageRoute(builder: (context) => NavigationBar()));
+        },
       ),
       centerTitle: true,
       title: Text(
         "Hackathon Upload",
         style: TextStyle(
           fontSize: 25,
-          color: context.theme.primaryColor,
+          color: Color(0xFF7BE495),
           fontWeight: FontWeight.bold,
         ),
       ),
