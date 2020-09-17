@@ -1,5 +1,4 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
-import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
@@ -47,11 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: CircleAvatar(
-                radius: 30.0,
-                backgroundImage: NetworkImage(
-                    "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg"),
-                backgroundColor: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg")),
               )),
         )
       ],
