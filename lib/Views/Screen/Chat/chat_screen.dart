@@ -1,14 +1,21 @@
+import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 
 class ChatPage extends StatefulWidget {
-  final String groupId;
-  final String userName;
-  final String gorupName;
+  String groupId;
+  String userName;
+  String gorupName;
+  final String conversationId;
+  final String userId;
+  final Conversation conversation;
 
-  ChatPage({Key key, this.groupId, this.userName, this.gorupName})
+  // ChatPage({Key key, this.groupId, this.userName, this.gorupName})
+  //     : super(key: key);
+  ChatPage({Key key, this.userId, this.conversationId, this.conversation})
       : super(key: key);
 
   @override
@@ -16,7 +23,19 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  TextEditingController textEditingController = TextEditingController();
+  CollectionReference ref;
+  final TextEditingController textEditingController = TextEditingController();
+  String hackathonName;
+  @override
+  void initState() {
+    ref = FirebaseFirestore.instance
+        .collection('conversations/${widget.conversationId}/messages');
+    print(widget.userId);
+    hackathonName = widget.conversation.name;
+    print("hackathonname : " + hackathonName);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +55,29 @@ class _ChatPageState extends State<ChatPage> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios),
-        onPressed: () {},
+      leading:
+          // IconButton(
+          //   icon: Icon(Icons.arrow_back_ios),
+          //   onPressed: () {
+          //     Navigator.pop(
+          //         context, MaterialPageRoute(builder: (context) => DetailView()));
+          //   },
+          // ),
+          Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+            backgroundImage: NetworkImage(widget.conversation.profileImage)),
       ),
+      actions: [
+        InkWell(
+          child: Icon(Icons.more_vert),
+          onTap: () {},
+        )
+      ],
       centerTitle: true,
       elevation: 0,
       title: Text(
-        "Hackathon Grup Name",
+        hackathonName,
         style: TextStyle(
           color: Colors.green,
         ),
@@ -53,67 +87,53 @@ class _ChatPageState extends State<ChatPage> {
 
   Expanded buildExpandedMessageScreen() {
     return Expanded(
-      child: ListView.builder(
-        reverse: true,
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(context.constMediumValue),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(context.constHighValue),
-                    color: Theme.of(context).primaryColor.withOpacity(0.4),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          buildAlignAvatarProfile(context),
-                          buildExpandedDataScreen(context),
-                        ],
-                      ),
-                    ],
+      child: StreamBuilder(
+          stream: ref.orderBy('timeStamp').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            return !snapshot.hasData
+                ? CircularProgressIndicator()
+                : ListView(
+                    children: snapshot.data.docs
+                        .map((document) => buildListTile(document, context))
+                        .toList());
+          }),
+    );
+  }
+
+  ListTile buildListTile(document, BuildContext context) {
+    return ListTile(
+      title: Align(
+          alignment: widget.userId != document.get('senderId')
+              ? Alignment.centerLeft
+              : Alignment.centerRight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.all(context.constMediumValue),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(context.constHighValue),
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
+                ),
+                child: Text(
+                  document.get('message'),
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+              Text(
+                document.get('timeStamp').toDate().toString(),
+                style: TextStyle(color: CupertinoColors.inactiveGray),
+              )
+            ],
+          )
+
       ),
     );
   }
-
-  Expanded buildExpandedDataScreen(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: context.constMediumValue,
-        ),
-        alignment: Alignment.centerLeft,
-        child: Text(
-          //index.toString(),
-          "deneme yazısı yfdsfdsfdsfdsfds fdsf adsfd safds afdsa fdsa fdsafdas",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Align buildAlignAvatarProfile(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: CircleAvatar(
-        radius: context.constHighValue,
-        backgroundImage: NetworkImage("https://picsum.photos/200"),
-        backgroundColor: Colors.transparent,
-      ),
-    );
-  }
-
   Padding buildPaddingMessageBox(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(context.constMediumValue),
@@ -171,7 +191,14 @@ class _ChatPageState extends State<ChatPage> {
         Icons.send,
         color: Colors.grey[900],
       ),
-      onPressed: () {},
+      onPressed: () async {
+        await ref.add({
+          "senderId": widget.userId,
+          "message": textEditingController.text,
+          "timeStamp": DateTime.now()
+        });
+        textEditingController.text = "";
+      },
     );
   }
 }
