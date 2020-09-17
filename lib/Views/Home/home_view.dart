@@ -1,5 +1,6 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
+import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ListTile hackathonCardListTile() {
     return ListTile(
+      onTap: () => {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HackatonDetail()))
+      },
       title: Text(
         'VBT Hackathon',
         style: Theme.of(context).textTheme.bodyText2.copyWith(

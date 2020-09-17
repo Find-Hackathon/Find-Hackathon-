@@ -5,18 +5,18 @@ class StarRating extends StatelessWidget {
   final int value;
   final IconData filledStar;
   final IconData unfilledStar;
-
+  final double size;
   const StarRating({
     Key key,
     this.value = 0,
     this.filledStar,
     this.unfilledStar,
     this.onChanged,
+    this.size,
   })  : assert(value != null),
         super(key: key);
   @override
   Widget build(BuildContext context) {
-    final size = 30.0;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(5, (index) {
