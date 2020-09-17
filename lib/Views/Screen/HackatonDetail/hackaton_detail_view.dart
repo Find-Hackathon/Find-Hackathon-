@@ -27,24 +27,26 @@ class _HackatonDetailState extends State<HackatonDetail> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+          appBar: appBar(context),
           //TODO:BottomNavigationBar
           body: Column(
-        children: [
-          buildHackatonPictures(context),
-          buildHackatonName(context),
-          buildStars(context),
-          buildHackatonDescription(context),
-          Spacer(
-            flex: 1,
-          ),
-          FatButton(
-            text: "Join",
-          ),
-          Spacer(
-            flex: 1,
-          ),
-        ],
-      )),
+            children: [
+              buildHackatonPictures(context),
+              buildHackatonName(context),
+              buildStars(context),
+              buildHackatonDescription(context),
+              Spacer(
+                flex: 1,
+              ),
+              FatButton(
+                text: "Katıl",
+                onPressed: () {},
+              ),
+              Spacer(
+                flex: 1,
+              ),
+            ],
+          )),
     );
   }
 
@@ -78,6 +80,23 @@ class _HackatonDetailState extends State<HackatonDetail> {
           detailModel.name,
           style: context.textTheme.headline5,
         ),
+      ),
+    );
+  }
+
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      titleSpacing: 24.0,
+      backgroundColor: Colors.white,
+      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
+      centerTitle: false,
+      title: Text(
+        'Hackathon Detayları',
+        style: Theme.of(context).textTheme.headline6.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 22.0,
+            color: Color(0xFF56C596)),
       ),
     );
   }

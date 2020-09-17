@@ -74,11 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        child: Column(
-          children: [
-            hackathonCardImage(size, imageUrl),
-            hackathonCardListTile()
-          ],
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HackatonDetail()));
+          },
+          child: Column(
+            children: [
+              hackathonCardImage(size, imageUrl),
+              hackathonCardListTile()
+            ],
+          ),
         ),
       ),
     );
@@ -102,10 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ListTile hackathonCardListTile() {
     return ListTile(
-      onTap: () => {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HackatonDetail()))
-      },
       title: Text(
         'VBT Hackathon',
         style: Theme.of(context).textTheme.bodyText2.copyWith(
