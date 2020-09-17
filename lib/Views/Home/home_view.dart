@@ -26,15 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
+      elevation: 0,
       titleSpacing: 24.0,
-      actionsIconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Colors.white,
+      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
       centerTitle: false,
       title: Text(
         'Hackathons',
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            .copyWith(fontWeight: FontWeight.w600, fontSize: 22.0),
+        style: Theme.of(context).textTheme.headline6.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 22.0,
+            color: Color(0xFF56C596)),
       ),
       actions: [
         Padding(
