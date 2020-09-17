@@ -6,27 +6,14 @@ import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_v
 import 'package:FindHackathon/Views/Screen/Participants/participants_view.dart';
 import 'package:flutter/material.dart';
 
-/// This Widget is the main application widget.
-class NavigationBar extends StatelessWidget {
-  static const String _title = 'Flutter Code Sample';
+class NavigationBar extends StatefulWidget {
+  NavigationBar({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
+  _NavigationBarState createState() => _NavigationBarState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
-
-  @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
