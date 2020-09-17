@@ -1,5 +1,7 @@
 import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
+import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   CollectionReference ref;
   final TextEditingController textEditingController = TextEditingController();
   String hackathonName;
+
   @override
   void initState() {
     ref = FirebaseFirestore.instance
@@ -55,20 +58,20 @@ class _ChatPageState extends State<ChatPage> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      leading:
-          // IconButton(
-          //   icon: Icon(Icons.arrow_back_ios),
-          //   onPressed: () {
-          //     Navigator.pop(
-          //         context, MaterialPageRoute(builder: (context) => DetailView()));
-          //   },
-          // ),
-          Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CircleAvatar(
-            backgroundImage: NetworkImage(widget.conversation.profileImage)),
-      ),
-      actions: [
+      leading: IconButton(
+          icon: IconButton(
+        icon: Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          Navigator.pop(
+              context, MaterialPageRoute(builder: (context) => DetailView()));
+        },
+      )),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+              backgroundImage: NetworkImage(widget.conversation.profileImage)),
+        ),
         InkWell(
           child: Icon(Icons.more_vert),
           onTap: () {},
@@ -93,14 +96,30 @@ class _ChatPageState extends State<ChatPage> {
             return !snapshot.hasData
                 ? CircularProgressIndicator()
                 : ListView(
-                    children: snapshot.data.docs
-                        .map((document) => buildListTile(document, context))
-                        .toList());
+                children: snapshot.data.docs
+                    .map((document) => buildListTile(document, context))
+                    .toList());
           }),
     );
   }
 
+  checkColor() {
+
+  }
+
   ListTile buildListTile(document, BuildContext context) {
+    Color color;
+    Color textColor;
+    if (widget.userId != document.get('senderId')) {
+      color = Color(0xffcff4d2).withOpacity(0.5);
+      // color = Theme.of(context).primaryColor.withOpacity(0.5);
+      textColor = Colors.black;
+    }
+    else {
+      color = Color(0xFF56C596);
+      textColor = Colors.white;
+    }
+
     return ListTile(
       title: Align(
           alignment: widget.userId != document.get('senderId')
@@ -113,27 +132,32 @@ class _ChatPageState extends State<ChatPage> {
                 padding: EdgeInsets.all(context.constMediumValue),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(context.constHighValue),
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
+                  color: color,
                 ),
                 child: Text(
                   document.get('message'),
                   style: TextStyle(
-                    color: Colors.white,
+                    color: textColor,
                   ),
                 ),
               ),
               Text(
-                document.get('timeStamp').toDate().toString(),
+                getDate(document),
                 style: TextStyle(color: CupertinoColors.inactiveGray),
               )
             ],
-          )
-
-      ),
+          )),
     );
   }
+
+  getDate(document) {
+    var dt = document.get('timeStamp').toDate();
+    var newFormat = DateFormat("jm");
+    String updatedDt = newFormat.format(dt);
+    print(updatedDt);
+    return updatedDt; // 20-04-03
+  }
+
   Padding buildPaddingMessageBox(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(context.constMediumValue),
