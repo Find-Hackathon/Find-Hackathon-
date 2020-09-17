@@ -1,7 +1,7 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
+import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,15 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
+      elevation: 0,
       titleSpacing: 24.0,
-      actionsIconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Colors.white,
+      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
       centerTitle: false,
       title: Text(
         'Hackathons',
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            .copyWith(fontWeight: FontWeight.w600, fontSize: 22.0),
+        style: Theme.of(context).textTheme.headline6.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 22.0,
+            color: Color(0xFF56C596)),
       ),
       actions: [
         Padding(
@@ -72,11 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        child: Column(
-          children: [
-            hackathonCardImage(size, imageUrl),
-            hackathonCardListTile()
-          ],
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HackatonDetail()));
+          },
+          child: Column(
+            children: [
+              hackathonCardImage(size, imageUrl),
+              hackathonCardListTile()
+            ],
+          ),
         ),
       ),
     );

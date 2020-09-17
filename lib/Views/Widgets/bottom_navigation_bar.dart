@@ -1,8 +1,7 @@
-import 'package:FindHackathon/Views/Home/home_view.dart';
-import 'package:FindHackathon/Views/Screen/ChatUserList/chat_user_list_view.dart';
-import 'package:flutter/material.dart';
-
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
+import 'package:FindHackathon/Views/Home/home_view.dart';
+import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
+import 'package:flutter/material.dart';
 
 /// This Widget is the main application widget.
 class NavigationBar extends StatelessWidget {
@@ -27,11 +26,11 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    ChatUserListView(),
+    DetailView(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,22 +45,33 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), title: Text("Anasayfa")),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), title: Text("Chat")),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 5,
+        shape: CircularNotchedRectangle(),
+        clipBehavior: Clip.antiAlias,
+        child: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home), title: Text("Anasayfa")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.chat), title: Text("Chat")),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color(0xFF56C596),
+          onTap: _onItemTapped,
+        ),
       ),
       floatingActionButton: Container(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
         child: FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: context.theme.primaryColor,
+          child: Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                      radius: 0.5,
+                      colors: [Color(0xFF7BE495), Color(0xFF329D9C)])),
+              child: Icon(Icons.add)),
           onPressed: () {},
         ),
       ),

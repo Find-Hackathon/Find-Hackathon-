@@ -1,7 +1,7 @@
 import 'package:FindHackathon/Core/Components/lottie_file.dart';
 import 'package:FindHackathon/Core/Constants/App/app_lottie.dart';
-import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
 import 'package:FindHackathon/Views/Screen/ForgotPassword/forgot_password.dart';
+import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
 import 'package:FindHackathon/Views/Widgets/oval_appbar.dart';
 import 'package:FindHackathon/Views/Widgets/space_seperator.dart';
@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Core/Extension/context_extension.dart';
 import '../../../Core/Extension/string_extension.dart';
+import '../../User.dart';
 import '../../Widgets/fat_button.dart';
 import 'login_view_model.dart';
 
@@ -115,10 +116,16 @@ class _LoginViewState extends State<LoginView> {
                   //     prefs.getBool("isLoggedIn").toString());
                   String id = await viewModel.firebaseLogin();
                   print(id);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DetailView()),
-                  );
+                  if (id == null)
+                    showErrorDialog();
+                  else {
+                    User.userId = id;
+                    print(id);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigationBar()),
+                    );
+                  }
                 } else {
                   viewModel.validationChange(true);
                 }
@@ -137,5 +144,18 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  Future<void> showErrorDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          Future.delayed(Duration(milliseconds: 700), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            title: Text('HATALI GİRİŞ!'),
+          );
+        });
   }
 }

@@ -30,16 +30,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         actions: [
           Expanded(
               child: Row(
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: Colors.black,
-                      onPressed: () {}),
-                  Spacer(),
-                  // Text("Forgot Password")
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ))
+            children: [
+              IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  color: Colors.black,
+                  onPressed: () {}),
+              Spacer(),
+              // Text("Forgot Password")
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ))
         ],
       ),
       body: Container(
@@ -78,10 +78,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 SpaceSeperator(),
                 ButtonText(
                     onPressed: () {
-                      Navigator.pop(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginView()));
+                      Navigator.pop(context,
+                          MaterialPageRoute(builder: (context) => LoginView()));
                     },
                     text: "Back to Login")
               ],

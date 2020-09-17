@@ -3,6 +3,7 @@ import 'dart:ui' show Radius;
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view_model.dart';
 import 'package:FindHackathon/Views/Widgets/fat_button.dart';
+import 'package:FindHackathon/Views/Widgets/star_display.dart';
 import 'package:flutter/material.dart';
 
 class HackatonDetail extends StatefulWidget {
@@ -26,24 +27,26 @@ class _HackatonDetailState extends State<HackatonDetail> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+          appBar: appBar(context),
           //TODO:BottomNavigationBar
           body: Column(
-        children: [
-          buildHackatonPictures(context),
-          buildHackatonName(context),
-          buildStars(context),
-          buildHackatonDescription(context),
-          Spacer(
-            flex: 1,
-          ),
-          FatButton(
-            text: "Join",
-          ),
-          Spacer(
-            flex: 1,
-          ),
-        ],
-      )),
+            children: [
+              buildHackatonPictures(context),
+              buildHackatonName(context),
+              buildStars(context),
+              buildHackatonDescription(context),
+              Spacer(
+                flex: 1,
+              ),
+              FatButton(
+                text: "Katıl",
+                onPressed: () {},
+              ),
+              Spacer(
+                flex: 1,
+              ),
+            ],
+          )),
     );
   }
 
@@ -57,25 +60,12 @@ class _HackatonDetailState extends State<HackatonDetail> {
     );
   }
 
-  Expanded buildStars(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
-        child: Row(
-          children: [
-            Icon(Icons.star,
-                color: detailModel.stars >= 1 ? Colors.yellow : Colors.grey),
-            Icon(Icons.star,
-                color: detailModel.stars >= 2 ? Colors.yellow : Colors.grey),
-            Icon(Icons.star,
-                color: detailModel.stars >= 3 ? Colors.yellow : Colors.grey),
-            Icon(Icons.star,
-                color: detailModel.stars >= 4 ? Colors.yellow : Colors.grey),
-            Icon(Icons.star,
-                color: detailModel.stars >= 5 ? Colors.yellow : Colors.grey)
-          ],
-        ),
+  Container buildStars(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: StarRating(
+        size: MediaQuery.of(context).size.width * 0.07,
+        value: detailModel.getStars(),
       ),
     );
   }
@@ -90,6 +80,23 @@ class _HackatonDetailState extends State<HackatonDetail> {
           detailModel.name,
           style: context.textTheme.headline5,
         ),
+      ),
+    );
+  }
+
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      titleSpacing: 24.0,
+      backgroundColor: Colors.white,
+      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
+      centerTitle: false,
+      title: Text(
+        'Hackathon Detayları',
+        style: Theme.of(context).textTheme.headline6.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 22.0,
+            color: Color(0xFF56C596)),
       ),
     );
   }
