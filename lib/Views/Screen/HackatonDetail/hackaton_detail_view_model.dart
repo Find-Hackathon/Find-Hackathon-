@@ -80,23 +80,27 @@ class Subscription {
 
 Future<String> subscribeToOrganization(
     String userId, String organizationId) async {
-  String subscribeUrl =
-      "https://find-hackathon.herokuapp.com/organizations/organizaionSubscribe/";
-  var subscription = new Subscription(subscribe: userId);
-  final http.Response response = await http.post(subscribeUrl + organizationId,
-      body: subscription.toJson());
-  switch (response.statusCode) {
-    case HttpStatus.ok:
-      var decodedJson = json.decode(response.body);
-      if (decodedJson["isSucces"]) {
-        return "Katılım Başarılı.";
-      } else if (decodedJson["errorMessage"]) {
-        return decodedJson["errorMessage"];
-      } else {
-        return "Something went wrong";
-      }
-      break;
-    default:
-      return "Something went wrong";
+  try {
+    String subscribeUrl =
+        "https://find-hackathon.herokuapp.com/organizations/organizaionSubscribe/";
+    var subscription = new Subscription(subscribe: userId);
+    final http.Response response = await http
+        .post(subscribeUrl + organizationId, body: subscription.toJson());
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var decodedJson = json.decode(response.body);
+        if (decodedJson["isSucces"]) {
+          return "Katılım Başarılı.";
+        } else if (decodedJson["errorMessage"]) {
+          return decodedJson["errorMessage"];
+        } else {
+          return "Kontenjan Doldu";
+        }
+        break;
+      default:
+        return "Kontenjan Doldu";
+    }
+  } catch (e) {
+    return "Kontenjan Doldu";
   }
 }

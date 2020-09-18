@@ -19,7 +19,7 @@ class RegisterViewModel extends BaseViewModel {
   }
 
   Future<String> firebaseUserCreate() async {
-    String id = userFirebase.createAccountFirebase(email, password);
+    String id = await userFirebase.createAccountFirebase(email, password);
     return id;
   }
 
