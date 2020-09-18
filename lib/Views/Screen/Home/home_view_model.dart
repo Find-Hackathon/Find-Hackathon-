@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:FindHackathon/Core/Base/base_view_model.dart';
-import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'home_model.dart';
 
 class HomeViewModel extends BaseViewModel {
   bool isLoading = false;

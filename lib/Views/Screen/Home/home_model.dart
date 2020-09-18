@@ -1,4 +1,4 @@
-import '../../Core/Base/base_model.dart';
+import 'package:FindHackathon/Core/Base/base_model.dart';
 
 class HomeModel extends BaseModel<HomeModel> {
   bool closed;

@@ -1,4 +1,3 @@
-import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/ForgotPassword/forgot_password_view_model.dart';
 import 'package:FindHackathon/Views/Screen/Register/register_view_model.dart';
 import 'package:provider/provider.dart';
