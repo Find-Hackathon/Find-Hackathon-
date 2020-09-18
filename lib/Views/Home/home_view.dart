@@ -3,6 +3,7 @@ import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
+import 'package:FindHackathon/Views/Widgets/bottom_panel.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
     viewModel.getData();
   }
 
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     
     return Scaffold(
+      key: _globalKey,
       appBar: appBar(context),
       body: body(size),
     );
@@ -33,6 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            print("object");
+            _globalKey.currentState.showBottomSheet(
+              (context) => BottomSheetPanelBody(),
+            );
+          }),
       elevation: 0,
       titleSpacing: 24.0,
       backgroundColor: Colors.white,
