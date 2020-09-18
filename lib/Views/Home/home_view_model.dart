@@ -15,7 +15,6 @@ class HomeViewModel extends BaseViewModel {
     if (jsonBody is List) {
       jsonBody.map((e) => hackathonList.add(HomeModel.fromJson(e))).toList();
     }
-    notifyListeners();
     print(hackathonList);
   }
 

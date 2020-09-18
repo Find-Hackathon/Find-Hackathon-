@@ -30,8 +30,5 @@ class AppProvider {
     ChangeNotifierProvider(
       create: (context) => ForgotPasswordViewModel(),
     ),
-    ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
-    ),
   ];
 }
