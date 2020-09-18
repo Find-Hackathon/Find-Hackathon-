@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'Conversation.dart';
-
 class FireStoreDB {
-  final FirebaseFirestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<List<Conversation>> getConversations(String userId) {
     var ref = _firestore

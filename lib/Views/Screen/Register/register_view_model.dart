@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../../Core/Base/base_view_model.dart';
 
 class RegisterViewModel extends BaseViewModel {
-  String id, name, image, username, email, password, confirmPassword;
+  String id, name, image, username, email, password, confirmPassword, _uid;
   bool validation = false;
   UserFirebase userFirebase = UserFirebase();
   final _formKey = GlobalKey<FormState>();
@@ -18,9 +18,13 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<String> firebaseUserCreate() async {
-    String id = userFirebase.createAccountFirebase(email, password);
-    return id;
+  Future<void> firebaseUserCreate() async {
+    userFirebase.createAccountFirebase(email, password);
+  }
+
+  Future<String> firebaseLogin() async {
+    _uid = await userFirebase.signinFirebase(email, password);
+    return _uid;
   }
 
   Future<http.Response> saveUser(UserModel userModel) {

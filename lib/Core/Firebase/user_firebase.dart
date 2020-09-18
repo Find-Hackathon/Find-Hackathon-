@@ -5,8 +5,8 @@ class UserFirebase {
 
   UserFirebase() : _firebaseAuth = FirebaseAuth.instance;
 
-  String createAccountFirebase(String email, String password) {
-    _firebaseAuth.createUserWithEmailAndPassword(
+  Future<String> createAccountFirebase(String email, String password) async {
+    await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return _firebaseAuth.currentUser.uid;
   }
