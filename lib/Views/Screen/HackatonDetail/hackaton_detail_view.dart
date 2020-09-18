@@ -1,5 +1,6 @@
 import 'dart:ui' show Radius;
 
+import 'package:FindHackathon/Core/Extension/string_extension.dart';
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view_model.dart';
 import 'package:FindHackathon/Views/Screen/Profile/Service/hackathon_service.dart';
@@ -53,7 +54,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
                 flex: 1,
               ),
               FatButton(
-                text: "Katıl",
+                text: "join".locale,
                 onPressed: () async {
                   String response = await (subscribeToOrganization(
                       User.userId, widget.organizationId));
@@ -100,7 +101,10 @@ class _HackatonDetailState extends State<HackatonDetail> {
         alignment: Alignment.centerLeft,
         child: Text(
           widget.organizationName,
-          style: context.textTheme.headline5,
+          style: Theme.of(context).textTheme.headline6.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 22.0,
+              color: context.theme.accentColor),
         ),
       ),
     );
@@ -110,23 +114,23 @@ class _HackatonDetailState extends State<HackatonDetail> {
     return AppBar(
       elevation: 0,
       titleSpacing: 24.0,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
       centerTitle: false,
       leading: IconButton(
           icon: IconButton(
-        icon: Icon(Icons.arrow_back_ios),
+        icon: Icon(Icons.arrow_back_ios, color: context.theme.accentColor),
         onPressed: () {
           Navigator.pop(context,
               MaterialPageRoute(builder: (context) => NavigationBar()));
         },
       )),
       title: Text(
-        'Hackathon Detayları',
+        'Hackathon Detayları'.locale,
         style: Theme.of(context).textTheme.headline6.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 22.0,
-            color: Color(0xFF56C596)),
+            color: context.theme.accentColor),
       ),
     );
   }

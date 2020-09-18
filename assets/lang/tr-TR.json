@@ -15,5 +15,7 @@
   "homepage": "Anasayfa",
   "chat": "Sohbet",
   "open": "Açık",
-  "close": "Kapalı"
+  "close": "Kapalı",
+  "join":"katıl",
+  "hackatonDetail":"Hackaton Detayları"
 }

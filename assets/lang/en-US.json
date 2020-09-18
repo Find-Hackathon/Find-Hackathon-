@@ -15,5 +15,7 @@
   "homepage": "Home Page",
   "chat": "Chat",
   "open": "Open",
-  "close": "Close"
+  "close": "Close",
+  "join":"Join",
+  "hackatonDetail":"HackatonDetail"
 }
