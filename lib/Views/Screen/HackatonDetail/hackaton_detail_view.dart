@@ -27,8 +27,6 @@ class HackatonDetail extends StatefulWidget {
 }
 
 class _HackatonDetailState extends State<HackatonDetail> {
-  Future<HackatonDetailViewModel> detailModel;
-
   String organizationUrl =
       "https://find-hackathon.herokuapp.com/organizations/id/";
 
@@ -56,8 +54,13 @@ class _HackatonDetailState extends State<HackatonDetail> {
               ),
               FatButton(
                 text: "Katıl",
-                onPressed: () {
-                  subscribeToOrganization(User.userId, widget.organizationId);
+                onPressed: () async {
+                  String response = await (subscribeToOrganization(
+                      User.userId, widget.organizationId));
+                  showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (_) => AlertDialog(title: Text(response)));
                 },
               ),
               Spacer(
