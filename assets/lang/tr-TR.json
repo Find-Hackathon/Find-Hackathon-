@@ -13,5 +13,7 @@
   "sixCharter": "en az 6 karakter",
   "threeCharter": "en az 3 karakter",
   "homepage": "Anasayfa",
-  "chat": "Sohbet"
+  "chat": "Sohbet",
+  "open": "Açık",
+  "close": "Kapalı"
 }

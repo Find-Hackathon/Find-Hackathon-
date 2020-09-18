@@ -169,14 +169,14 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: context.constMediumValue),
             child: homeModel.closed == true
                 ? Text(
-                    "Kapalı",
+                    "close".locale,
                     style:
                         context.textTheme.bodyText1.copyWith(color: Colors.red),
                   )
                 : Text(
-                    "Acik",
+                    "open".locale,
                     style: context.textTheme.bodyText1
-                        .copyWith(color: Colors.grey),
+                        .copyWith(color: Colors.green),
                   ),
           ),
           Stack(

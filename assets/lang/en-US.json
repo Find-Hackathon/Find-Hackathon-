@@ -13,5 +13,7 @@
   "sixCharter": "at least 6 characters",
   "threeCharter": "at least 3 characters",
   "homepage": "Home Page",
-  "chat": "Chat"
+  "chat": "Chat",
+  "open": "Open",
+  "close": "Close"
 }
