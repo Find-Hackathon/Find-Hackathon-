@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 10.0),
           SearchTextField(size: MediaQuery.of(context).size),
           SizedBox(height: 10.0),
-          ...viewModel.hackathonList.map(
+          ...viewModel.hackathonList.reversed.map(
             (e) => hackathonCard(size, e),
           )
 
