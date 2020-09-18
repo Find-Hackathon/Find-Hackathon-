@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:FindHackathon/Core/Base/base_view_model.dart';
 import 'package:http/http.dart ' as http;
 
+/*
 class HackatonDetailViewModel extends BaseViewModel {
   String name;
   String description;
@@ -60,7 +61,7 @@ class HackatonDetailViewModel extends BaseViewModel {
     // TODO: implement init
   }
 }
-
+*/
 class Subscription {
   String subscribe;
 
@@ -77,7 +78,7 @@ class Subscription {
   }
 }
 
-Future<void> subscribeToOrganization(
+Future<String> subscribeToOrganization(
     String userId, String organizationId) async {
   String subscribeUrl =
       "https://find-hackathon.herokuapp.com/organizations/organizaionSubscribe/";
@@ -88,10 +89,14 @@ Future<void> subscribeToOrganization(
     case HttpStatus.ok:
       var decodedJson = json.decode(response.body);
       if (decodedJson["isSucces"]) {
-        print(decodedJson);
+        return "Katılım Başarılı.";
+      } else if (decodedJson["errorMessage"]) {
+        return decodedJson["errorMessage"];
+      } else {
+        return "Something went wrong";
       }
       break;
     default:
-      print("Something went wrong");
+      return "Something went wrong";
   }
 }
