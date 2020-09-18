@@ -8,7 +8,11 @@
 ## Images
 
 
-
+<p float="left">
+  <img src="Screenshots/.gif" width="100" />
+  <img src="Screenshots/.gif" width="100" /> 
+  <img src="Screenshots/.gif" width="100" />
+</p>
 
 
 
