@@ -1,13 +1,16 @@
-import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
-import 'package:FindHackathon/Views/Widgets/outline_text_field.dart';
+import 'package:FindHackathon/Views/Screen/HackathonPage/outline_field_oval.dart';
+
+import '../../Widgets/bottom_navigation_bar.dart';
+import '../../Widgets/outline_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-import '../../../Core/Extension/context_extension.dart';
 import '../../Widgets/fat_button.dart';
 import '../../Widgets/space_seperator.dart';
+import 'hackathon_upload_page_view_model.dart';
+import '../../../Core/Extension/context_extension.dart';
 
 class HackathonUpload extends StatefulWidget {
   HackathonUpload({Key key}) : super(key: key);
@@ -17,6 +20,8 @@ class HackathonUpload extends StatefulWidget {
 }
 
 class _HackathonUploadState extends State<HackathonUpload> {
+  HackathonUploadModel _viewModel = HackathonUploadModel();
+
   File _image;
 
   @override
@@ -36,14 +41,12 @@ class _HackathonUploadState extends State<HackathonUpload> {
           FirebaseStorage.instance.ref().child(fileName);
       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
       var resim = await (await uploadTask.onComplete).ref.getDownloadURL();
-      var resimUrl = resim.toString();
+      _viewModel.resimUrl = resim.toString();
       StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
       setState(() {
-        print("Profile Picture uploaded");
-        debugPrint(resimUrl);
         Scaffold.of(context).showSnackBar(
           SnackBar(
-            content: Text('Photo added'),
+            content: Text('Hackathon added'),
           ),
         );
       });
@@ -64,7 +67,7 @@ class _HackathonUploadState extends State<HackathonUpload> {
                 SpaceSeperator(),
                 buildRowGetImage(context, getImageLocale),
                 SpaceSeperator(),
-                bodyForm(),
+                bodyForm(context),
                 SpaceSeperator(),
                 buildRowSumbitButton(uploadPic, context),
               ],
@@ -108,8 +111,17 @@ class _HackathonUploadState extends State<HackathonUpload> {
       children: [
         FatButton(
           text: "SUMBIT",
-          onPressed: () {
-            uploadPic(context);
+          onPressed: () async {
+            try {
+              await uploadPic(context);
+              _viewModel.createOrganizatiom();
+            } catch (e) {
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Could not add hackathon'),
+                ),
+              );
+            }
           },
         ),
       ],
@@ -142,19 +154,22 @@ class _HackathonUploadState extends State<HackathonUpload> {
     );
   }
 
-  Padding bodyForm() {
+  Padding bodyForm(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
       child: Form(
+        key: _viewModel.formKeyHackathonUploadModel,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OutlineTextField(
-              labelText: "Hackathon Adı",
+            OutlieField(
+              labelText: "Hackathon",
+              onChanged: (data) => _viewModel.name = data,
             ),
             SpaceSeperator(),
-            OutlineTextField(
+            OutlieField(
+              onChanged: (data) => _viewModel.description = data,
               labelText: "Hackathon Açıklaması",
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:FindHackathon/Core/Service/Network/ChatsModel.dart';
 import 'package:FindHackathon/Core/Service/Network/Conversation.dart';
 import 'package:FindHackathon/Views/Screen/Chat/chat_screen.dart';
+import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,73 +28,75 @@ class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
     var model = GetIt.instance<ChatsModel>();
+    return WillPopScope(
+      onWillPop: backpressed,
+      child: Scaffold(
+        body: ChangeNotifierProvider(
+          create: (BuildContext context) => model,
+          child: StreamBuilder<List<Conversation>>(
+            stream: model.conversations(User.userId),
+            builder: (BuildContext context,
+                AsyncSnapshot<List<Conversation>> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
 
-    return Scaffold(
-      body: ChangeNotifierProvider(
-        create: (BuildContext context) => model,
-        child: StreamBuilder<List<Conversation>>(
-          stream: model.conversations(User.userId),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<Conversation>> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text('Loading...');
+              }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text('Loading...');
-            }
+              return ListView(
+                children: snapshot.data
+                    .map((doc) => ListTile(
+                          leading: CircleAvatar(
+                              backgroundImage: NetworkImage(doc.profileImage)),
+                          title: Text(doc.name),
+                          subtitle: Text(doc.displayMessage),
+                          trailing: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () async {
+                              DocumentReference docRef = FirebaseFirestore
+                                  .instance
+                                  .collection('conversations')
+                                  .doc(doc.id);
+                              DocumentSnapshot docSnapshot = await docRef.get();
+                              List members = docSnapshot.data()['members'];
+                              members.map((e) {
+                                if (e == User.userId)
+                                  print("already have");
+                                else
+                                  docRef.update({
+                                    'members':
+                                        FieldValue.arrayUnion([User.userId])
+                                  });
+                              }).toList();
 
-            return ListView(
-              children: snapshot.data
-                  .map((doc) => ListTile(
-                        leading: CircleAvatar(
-                            backgroundImage: NetworkImage(doc.profileImage)),
-                        title: Text(doc.name),
-                        subtitle: Text(doc.displayMessage),
-                        trailing: IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () async {
-                            DocumentReference docRef = FirebaseFirestore
-                                .instance
-                                .collection('conversations')
-                                .doc(doc.id);
-                            DocumentSnapshot docSnapshot = await docRef.get();
-                            List members = docSnapshot.data()['members'];
-                            members.map((e) {
-                              if (e == User.userId)
-                                print("already have");
-                              else
-                                docRef.update({
-                                  'members':
-                                      FieldValue.arrayUnion([User.userId])
-                                });
-                            }).toList();
-
-                            // CollectionReference ref = FirebaseFirestore.instance
-                            //     .collection('conversations');
-                            // Map<String,dynamic> demoData = {
-                            //   "members" : "keyvalue"
-                            // };
-                            // ref.add(demoData);
-                            // QuerySnapshot querySnapshot = await ref.get();
-                            // querySnapshot.docs[0].reference
-                            //     .update({"displayMessage": "lastMessage"});
+                              // CollectionReference ref = FirebaseFirestore.instance
+                              //     .collection('conversations');
+                              // Map<String,dynamic> demoData = {
+                              //   "members" : "keyvalue"
+                              // };
+                              // ref.add(demoData);
+                              // QuerySnapshot querySnapshot = await ref.get();
+                              // querySnapshot.docs[0].reference
+                              //     .update({"displayMessage": "lastMessage"});
+                            },
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatPage(
+                                      userId: User.userId,
+                                      conversationId: doc.id,
+                                      conversation: doc)),
+                            );
                           },
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatPage(
-                                    userId: User.userId,
-                                    conversationId: doc.id,
-                                    conversation: doc)),
-                          );
-                        },
-                      ))
-                  .toList(),
-            );
-          },
+                        ))
+                    .toList(),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -106,6 +109,15 @@ class _DetailViewState extends State<DetailView> {
         .doc("Mdnxurl5UxXg9IUPAjFi")
         .get();
   }
+
+  Future<bool> backpressed() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => NavigationBar()),
+    );
+  }
+
 
 // return Container(
 //     child: FutureBuilder(

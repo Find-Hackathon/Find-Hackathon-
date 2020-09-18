@@ -1,16 +1,10 @@
-import 'dart:convert';
-
 import 'package:FindHackathon/Core/Constants/App/color.dart';
-import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import '../Screen/Profile/Model/hackathon_model.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -59,11 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: CircleAvatar(
-                radius: 30.0,
-                backgroundImage: NetworkImage(
-                    "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg"),
-                backgroundColor: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg")),
               )),
         )
       ],
@@ -101,8 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HackatonDetail()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HackatonDetail(
+                        organizationId: homeModel.id,
+                        organizationImage: homeModel.image,
+                        organizationName: homeModel.name,
+                        organizationDescription: homeModel.description)));
           },
           child: Column(
             children: [

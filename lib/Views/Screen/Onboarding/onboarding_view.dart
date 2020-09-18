@@ -20,10 +20,6 @@ class _OnboardingHomeState extends State<OnboardingHome> {
   List<SliderModel> slides = new List<SliderModel>();
   int slideIndex = 0;
 
-  /*
-  PageController _controller;
-  var currentPageValue = 0.0;
-*/
   @override
   void initState() {
     super.initState();
