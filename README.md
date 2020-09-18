@@ -7,11 +7,11 @@
 
 ## Images
 
-
+<p float="left">
   <img src="Screenshots/93615612-49881d80-f9dc-11ea-86df-00bc1659defa.gif" width="300" />
   <img src="Screenshots/93615276-da122e00-f9db-11ea-925e-7a61041e8c34.gif" width="300" /> 
   <img src="Screenshots/93615612-49881d80-f9dc-11ea-86df-00bc1659defa.gif" width="300" />
-
+</p>
 
 
 ## [Presentation](https://www.canva.com/design/DAEIC7iKTMQ/Fg-cDRs_c31r9ail-bpx3g/view?utm_content=DAEIC7iKTMQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
