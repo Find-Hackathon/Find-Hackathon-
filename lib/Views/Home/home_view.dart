@@ -5,6 +5,7 @@ import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.d
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
 import 'package:FindHackathon/Views/Widgets/bottom_panel.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
+import 'package:FindHackathon/Views/Widgets/space_seperator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Core/Extension/context_extension.dart';
@@ -161,13 +162,32 @@ class _HomeScreenState extends State<HomeScreen> {
             .caption
             .copyWith(fontWeight: FontWeight.w500),
       ),
-      trailing: Stack(
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          hackathonCardAvatar(
-              "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg"),
-          hackathonCardAvatar("https://picsum.photos/200/300"),
-          hackathonCardAvatar("https://picsum.photos/200/300"),
-          hackathonCardAvatar("https://picsum.photos/200/300"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.constMediumValue),
+            child: homeModel.closed == true
+                ? Text(
+                    "Kapalı",
+                    style:
+                        context.textTheme.bodyText1.copyWith(color: Colors.red),
+                  )
+                : Text(
+                    "Acik",
+                    style: context.textTheme.bodyText1
+                        .copyWith(color: Colors.grey),
+                  ),
+          ),
+          Stack(
+            children: [
+              hackathonCardAvatar(
+                  "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg"),
+              hackathonCardAvatar("https://picsum.photos/200/300"),
+              hackathonCardAvatar("https://picsum.photos/200/300"),
+              hackathonCardAvatar("https://picsum.photos/200/300"),
+            ],
+          ),
         ],
       ),
     );
