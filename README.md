@@ -22,7 +22,7 @@
 
 ## Thanks
 
-Special thanks to our teachers and mentors <a href="https://github.com/VB10" target="_blank">**Veli Bacık**</a> and <a href="https://github.com/borakasmer" target="_blank">**Nalan Duman**</a>
+Special thanks to our teachers and mentors <a href="https://github.com/VB10" target="_blank">**Veli Bacık**</a> and <a href="https://github.com/borakasmer" target="_blank">**Bora Kaşmer**</a>
 
 
 
