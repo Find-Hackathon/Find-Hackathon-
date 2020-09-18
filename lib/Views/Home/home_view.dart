@@ -23,13 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    viewModel.getData().then((value) => setState(() {}));
   }
 
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getData().then((value) => setState(() {}));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _globalKey,
