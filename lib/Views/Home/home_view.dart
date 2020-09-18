@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:FindHackathon/Core/Constants/App/color.dart';
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
+import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import '../Screen/Profile/Model/hackathon_model.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -14,11 +20,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeViewModel viewModel;
+  HomeViewModel viewModel = HomeViewModel();
+  @override
+  void initState() {
+    super.initState();
+    viewModel.getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    viewModel = HomeViewModel();
+    
     return Scaffold(
       appBar: appBar(context),
       body: body(size),
@@ -58,7 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-//"https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg")),
   SingleChildScrollView body(Size size) {
     return SingleChildScrollView(
       child: Column(
@@ -66,13 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 10.0),
           SearchTextField(size: MediaQuery.of(context).size),
           SizedBox(height: 10.0),
-          ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList(),
+          ...viewModel.hackathonList.map(
+            (e) => hackathonCard(size, e),
+          )
+
+          // ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList();,
         ],
       ),
     );
   }
 
-  Container hackathonCard(Size size) {
+  Container hackathonCard(Size size, HomeModel homeModel) {
     String imageUrl =
         "https://sm.mashable.com/t/mashable_in/photo/default/hackers-hackathon-india-pandemic-covid-19-lockdown_cxrq.960.jpg";
     return Container(
@@ -91,8 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Column(
             children: [
-              hackathonCardImage(size, imageUrl),
-              hackathonCardListTile()
+              hackathonCardImage(size, homeModel.image),
+              hackathonCardListTile(homeModel)
             ],
           ),
         ),
@@ -116,17 +131,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  ListTile hackathonCardListTile() {
+  ListTile hackathonCardListTile(HomeModel homeModel) {
     return ListTile(
       title: Text(
-        'VBT Hackathon',
+        homeModel.name.toString(),
         style: Theme.of(context).textTheme.bodyText2.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
       ),
       subtitle: Text(
-        'VBT Teknoloji',
+         homeModel.description,
         style: Theme.of(context)
             .textTheme
             .caption
