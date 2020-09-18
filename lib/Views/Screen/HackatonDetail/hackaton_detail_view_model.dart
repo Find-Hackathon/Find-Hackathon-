@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:FindHackathon/Core/Base/base_view_model.dart';
-import 'package:http/http.dart ' as http;
+import 'package:http/http.dart' as http;
 
 class HackatonDetailViewModel extends BaseViewModel {
   String name;

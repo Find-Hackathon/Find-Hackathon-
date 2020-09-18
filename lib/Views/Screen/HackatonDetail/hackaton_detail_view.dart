@@ -10,34 +10,28 @@ import 'package:FindHackathon/Views/Widgets/star_display.dart';
 import 'package:flutter/material.dart';
 
 class HackatonDetail extends StatefulWidget {
-  HackatonDetail(
+  final String organizationId;
+  final String organizationImage;
+  final String organizationName;
+  final String organizationDescription;
+  const HackatonDetail(
       {Key key,
       this.organizationId,
       this.organizationImage,
       this.organizationName,
       this.organizationDescription})
       : super(key: key);
-  final String organizationId;
-  final String organizationImage;
-  final String organizationName;
-  final String organizationDescription;
+
   @override
-  _HackatonDetailState createState() => _HackatonDetailState(organizationId,
-      organizationImage, organizationName, organizationDescription);
+  _HackatonDetailState createState() => _HackatonDetailState();
 }
 
 class _HackatonDetailState extends State<HackatonDetail> {
   Future<HackatonDetailViewModel> detailModel;
-  String organizationId;
-  String organizationImage;
-  String organizationName;
-  String organizationDescription;
+
   String organizationUrl =
       "https://find-hackathon.herokuapp.com/organizations/id/";
-  _HackatonDetailState(String getOrganizationId, String organizationImage,
-      String organizationName, String organizationDescription) {
-    this.organizationId = organizationId;
-  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -63,7 +57,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
               FatButton(
                 text: "Katıl",
                 onPressed: () {
-                  subscribeToOrganization(User.userId, organizationId);
+                  subscribeToOrganization(User.userId, widget.organizationId);
                 },
               ),
               Spacer(
@@ -78,7 +72,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: context.constHighValue),
       child: Text(
-        organizationDescription,
+        widget.organizationDescription,
         style: context.textTheme.bodyText2,
       ),
     );
@@ -102,7 +96,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
         margin: EdgeInsets.symmetric(horizontal: context.constHighValue),
         alignment: Alignment.centerLeft,
         child: Text(
-          organizationName,
+          widget.organizationName,
           style: context.textTheme.headline5,
         ),
       ),
@@ -143,7 +137,7 @@ class _HackatonDetailState extends State<HackatonDetail> {
               bottomRight: Radius.circular(context.constMediumValue)),
           child: Container(
               child: Image.network(
-            organizationImage,
+            widget.organizationImage,
             fit: BoxFit.cover,
           ))),
     );

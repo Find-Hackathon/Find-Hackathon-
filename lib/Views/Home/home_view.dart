@@ -1,4 +1,5 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
+import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
@@ -14,13 +15,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeViewModel viewModel = HomeViewModel();
+  @override
+  void initState() {
+    super.initState();
+    viewModel.getData();
+  }
+
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
-  HomeViewModel viewModel;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    viewModel = HomeViewModel();
+    
     return Scaffold(
       key: _globalKey,
       appBar: appBar(context),
@@ -69,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-//"https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg")),
   SingleChildScrollView body(Size size) {
     return SingleChildScrollView(
       child: Column(
@@ -77,17 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 10.0),
           SearchTextField(size: MediaQuery.of(context).size),
           SizedBox(height: 10.0),
-          ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList(),
+          ...viewModel.hackathonList.map(
+            (e) => hackathonCard(size, e),
+          )
+
+          // ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList();,
         ],
       ),
     );
   }
 
-  Container hackathonCard(Size size) {
-    String organizationId;
-    String organizationImage;
-    String organizationName;
-    String organizationDescription;
+  Container hackathonCard(Size size, HomeModel homeModel) {
     String imageUrl =
         "https://sm.mashable.com/t/mashable_in/photo/default/hackers-hackathon-india-pandemic-covid-19-lockdown_cxrq.960.jpg";
     return Container(
@@ -105,15 +111,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HackatonDetail(
-                        organizationId: organizationId,
-                        organizationImage: organizationImage,
-                        organizationName: organizationName,
-                        organizationDescription: organizationDescription)));
+                        organizationId: homeModel.id,
+                        organizationImage: homeModel.image,
+                        organizationName: homeModel.name,
+                        organizationDescription: homeModel.description)));
           },
           child: Column(
             children: [
-              hackathonCardImage(size, imageUrl),
-              hackathonCardListTile()
+              hackathonCardImage(size, homeModel.image),
+              hackathonCardListTile(homeModel)
             ],
           ),
         ),
@@ -137,17 +143,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  ListTile hackathonCardListTile() {
+  ListTile hackathonCardListTile(HomeModel homeModel) {
     return ListTile(
       title: Text(
-        'VBT Hackathon',
+        homeModel.name.toString(),
         style: Theme.of(context).textTheme.bodyText2.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
       ),
       subtitle: Text(
-        'VBT Teknoloji',
+         homeModel.description,
         style: Theme.of(context)
             .textTheme
             .caption
