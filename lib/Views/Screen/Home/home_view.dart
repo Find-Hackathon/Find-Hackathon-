@@ -77,19 +77,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SingleChildScrollView body(Size size) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 10.0),
-          SearchTextField(size: MediaQuery.of(context).size),
-          SizedBox(height: 10.0),
-          ...viewModel.hackathonList.reversed.map(
-            (e) => hackathonCard(size, e),
-          )
+  RefreshIndicator body(Size size) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        print("Reflesh");
+        await viewModel.getData().then((value) => setState(() {}));
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10.0),
+            SearchTextField(size: MediaQuery.of(context).size),
+            SizedBox(height: 10.0),
+            ...viewModel.hackathonList.reversed.map(
+              (e) => hackathonCard(size, e),
+            )
 
-          // ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList();,
-        ],
+            // ...viewModel.hackathonList.map((e) => hackathonCard(size)).toList();,
+          ],
+        ),
       ),
     );
   }
