@@ -7,9 +7,10 @@
 
 ## Images
 
-![1](https://user-images.githubusercontent.com/34714108/93614701-25780c80-f9db-11ea-804f-0a2f0e3ee745.gif)
 
-![2](https://user-images.githubusercontent.com/34714108/93615276-da122e00-f9db-11ea-925e-7a61041e8c34.gif)
+![Screenshot](Screenshots/.gif)
+
+
 
 ## [Presentation](https://www.canva.com/design/DAEIC7iKTMQ/Fg-cDRs_c31r9ail-bpx3g/view?utm_content=DAEIC7iKTMQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 <a href="" title="Presentation"></a>
