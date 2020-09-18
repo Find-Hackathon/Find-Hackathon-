@@ -11,5 +11,7 @@
   "register": "Register",
   "invalidEmail": "Invalid email",
   "sixCharter": "at least 6 characters",
-  "threeCharter": "at least 3 characters"
+  "threeCharter": "at least 3 characters",
+  "homepage": "Home Page",
+  "chat": "Chat"
 }

@@ -6,6 +6,8 @@ import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
 import 'package:FindHackathon/Views/Widgets/bottom_panel.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
 import 'package:flutter/material.dart';
+import '../../Core/Extension/context_extension.dart';
+import '../../Core/Extension/string_extension.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -27,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
     return Scaffold(
       key: _globalKey,
       appBar: appBar(context),
@@ -38,24 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar appBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
+          color: context.theme.accentColor,
           icon: Icon(Icons.menu),
           onPressed: () {
-            print("object");
             _globalKey.currentState.showBottomSheet(
               (context) => BottomSheetPanelBody(),
             );
           }),
       elevation: 0,
       titleSpacing: 24.0,
-      backgroundColor: Colors.white,
-      actionsIconTheme: IconThemeData(color: Color(0xFF56C596)),
+      backgroundColor: Colors.transparent,
       centerTitle: false,
       title: Text(
         'Hackathons',
         style: Theme.of(context).textTheme.headline6.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 22.0,
-            color: Color(0xFF56C596)),
+            color: context.theme.accentColor),
       ),
       actions: [
         GestureDetector(
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       ),
       subtitle: Text(
-         homeModel.description,
+        homeModel.description,
         style: Theme.of(context)
             .textTheme
             .caption

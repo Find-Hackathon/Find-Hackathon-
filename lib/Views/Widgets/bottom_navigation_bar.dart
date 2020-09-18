@@ -1,3 +1,7 @@
+import 'package:FindHackathon/Core/Extension/string_extension.dart';
+import 'package:FindHackathon/Core/Extension/context_extension.dart';
+
+import 'package:FindHackathon/Core/Utils/custom_linear_grediant.dart';
 import 'package:FindHackathon/Views/Home/home_view.dart';
 import 'package:FindHackathon/Views/Screen/Detail/detail_view.dart';
 import 'package:FindHackathon/Views/Screen/HackathonPage/hackathon_upload_page_view.dart';
@@ -40,12 +44,12 @@ class _NavigationBarState extends State<NavigationBar> {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("Anasayfa")),
+                icon: Icon(Icons.home), title: Text("homepage".locale)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.chat), title: Text("Chat")),
+                icon: Icon(Icons.chat), title: Text("chat".locale)),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Color(0xFF56C596),
+          selectedItemColor: context.theme.primaryColor,
           onTap: _onItemTapped,
         ),
       ),
@@ -55,10 +59,9 @@ class _NavigationBarState extends State<NavigationBar> {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                      radius: 0.5,
-                      colors: [Color(0xFF7BE495), Color(0xFF329D9C)])),
+                shape: BoxShape.circle,
+                gradient: customLinearGradient(context.theme.primaryColor),
+              ),
               child: Icon(Icons.add)),
           onPressed: () {
             Navigator.push(context,
