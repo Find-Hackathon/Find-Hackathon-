@@ -11,5 +11,7 @@
   "register": "Üye Ol",
   "invalidEmail": "Geçersiz Email",
   "sixCharter": "en az 6 karakter",
-  "threeCharter": "en az 3 karakter"
+  "threeCharter": "en az 3 karakter",
+  "homepage": "Anasayfa",
+  "chat": "Sohbet"
 }
