@@ -1,13 +1,12 @@
 import 'package:FindHackathon/Core/Constants/App/color.dart';
+import 'package:FindHackathon/Core/Service/Navigation/navigation_service.dart';
 import 'package:FindHackathon/Views/Home/home_model.dart';
 import 'package:FindHackathon/Views/Home/home_view_model.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view.dart';
 import 'package:FindHackathon/Views/Screen/Profile/profile.dart';
 import 'package:FindHackathon/Views/Widgets/bottom_panel.dart';
 import 'package:FindHackathon/Views/Widgets/search_text_row.dart';
-import 'package:FindHackathon/Views/Widgets/space_seperator.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../Core/Extension/context_extension.dart';
 import '../../Core/Extension/string_extension.dart';
 
@@ -63,8 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         GestureDetector(
           onTap: () {
-            Navigator.pop(
-                context, MaterialPageRoute(builder: (context) => Profile()));
+            NavigatorService.instance.navigateTo(Profile());
           },
           child: Padding(
               padding: const EdgeInsets.only(right: 8.0),

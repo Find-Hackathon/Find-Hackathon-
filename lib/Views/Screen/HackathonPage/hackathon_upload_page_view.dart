@@ -1,7 +1,6 @@
 import 'package:FindHackathon/Views/Screen/HackathonPage/outline_field_oval.dart';
 
 import '../../Widgets/bottom_navigation_bar.dart';
-import '../../Widgets/outline_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';

@@ -110,14 +110,12 @@ class _DetailViewState extends State<DetailView> {
         .get();
   }
 
-  Future<bool> backpressed() async {
+  Future<void> backpressed() async {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => NavigationBar()),
+      MaterialPageRoute(builder: (context) => NavigationBar()),
     );
   }
-
 
 // return Container(
 //     child: FutureBuilder(
