@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var viewModel;
+  var viewModel = HomeViewModel();
   @override
   @override
   void initState() {
@@ -29,8 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel = Provider.of<HomeViewModel>(context);
-    viewModel.getData();
+    viewModel.getData().then((value) => setState(() {}));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _globalKey,
