@@ -1,16 +1,21 @@
-# FindHackathon
+# Hackaton Find
 
-A new Flutter project.
+## A social media app to find hackathons, join teams, and chat with them.
+ - See current competitions and join them
+ - If you don't have a teammate, you can match according to your attributes.
+ - Collect points and earn rewards as you win
 
-## Getting Started
+## Images
 
-This project is a starting point for a Flutter application.
+![2](https://user-images.githubusercontent.com/34714108/93613440-8acafe00-f9d9-11ea-9fce-5a337297d4f2.gif)
 
-A few resources to get you started if this is your first Flutter project:
+![1](https://user-images.githubusercontent.com/34714108/93613267-4f303400-f9d9-11ea-82ad-8fc2aee5c959.gif)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Presentation
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Presentation](https://www.canva.com/design/DAEIC7iKTMQ/Fg-cDRs_c31r9ail-bpx3g/view?utm_content=DAEIC7iKTMQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+<a href="" title="Presentation"></a>
+
+## Thanks
+
+Special thanks to our teachers and mentors @vb10 and @borakasmer
