@@ -8,7 +8,7 @@
 ## Images
 
 
-![Screenshot](Screenshots/.gif)
+
 
 
 
