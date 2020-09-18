@@ -94,10 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HackatonDetail(
-                        organizationId: organizationId,
-                        organizationImage: organizationImage,
-                        organizationName: organizationName,
-                        organizationDescription: organizationDescription)));
+                        organizationId: "https://picsum.photos/200/300",
+                        organizationImage: "https://picsum.photos/200/300",
+                        organizationName: "https://picsum.photos/200/300",
+                        organizationDescription:
+                            "https://picsum.photos/200/300")));
           },
           child: Column(
             children: [
