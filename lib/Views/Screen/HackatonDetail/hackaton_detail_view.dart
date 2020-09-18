@@ -2,25 +2,46 @@ import 'dart:ui' show Radius;
 
 import 'package:FindHackathon/Core/Extension/context_extension.dart';
 import 'package:FindHackathon/Views/Screen/HackatonDetail/hackaton_detail_view_model.dart';
+import 'package:FindHackathon/Views/Screen/Profile/Service/hackathon_service.dart';
+import 'package:FindHackathon/Views/User.dart';
 import 'package:FindHackathon/Views/Widgets/bottom_navigation_bar.dart';
 import 'package:FindHackathon/Views/Widgets/fat_button.dart';
 import 'package:FindHackathon/Views/Widgets/star_display.dart';
 import 'package:flutter/material.dart';
 
 class HackatonDetail extends StatefulWidget {
-  HackatonDetail({Key key}) : super(key: key);
-
+  HackatonDetail(
+      {Key key,
+      this.organizationId,
+      this.organizationImage,
+      this.organizationName,
+      this.organizationDescription})
+      : super(key: key);
+  final String organizationId;
+  final String organizationImage;
+  final String organizationName;
+  final String organizationDescription;
   @override
-  _HackatonDetailState createState() => _HackatonDetailState();
+  _HackatonDetailState createState() => _HackatonDetailState(organizationId,
+      organizationImage, organizationName, organizationDescription);
 }
 
 class _HackatonDetailState extends State<HackatonDetail> {
-  HackatonDetailModel detailModel = new HackatonDetailModel();
+  Future<HackatonDetailViewModel> detailModel;
+  String organizationId;
+  String organizationImage;
+  String organizationName;
+  String organizationDescription;
+  String organizationUrl =
+      "https://find-hackathon.herokuapp.com/organizations/id/";
+  _HackatonDetailState(String getOrganizationId, String organizationImage,
+      String organizationName, String organizationDescription) {
+    this.organizationId = organizationId;
+  }
   @override
   void initState() {
     // TODO: implement initState
 
-    detailModel = getHackatonDetail();
     super.initState();
   }
 
@@ -34,14 +55,16 @@ class _HackatonDetailState extends State<HackatonDetail> {
             children: [
               buildHackatonPictures(context),
               buildHackatonName(context),
-              buildStars(context),
+              //buildStars(context),
               buildHackatonDescription(context),
               Spacer(
                 flex: 1,
               ),
               FatButton(
                 text: "Katıl",
-                onPressed: () {},
+                onPressed: () {
+                  subscribeToOrganization(User.userId, organizationId);
+                },
               ),
               Spacer(
                 flex: 1,
@@ -53,14 +76,15 @@ class _HackatonDetailState extends State<HackatonDetail> {
 
   Container buildHackatonDescription(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
+      margin: EdgeInsets.symmetric(horizontal: context.constHighValue),
       child: Text(
-        detailModel.description,
+        organizationDescription,
         style: context.textTheme.bodyText2,
       ),
     );
   }
 
+/*
   Container buildStars(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
@@ -70,15 +94,15 @@ class _HackatonDetailState extends State<HackatonDetail> {
       ),
     );
   }
-
+*/
   Expanded buildHackatonName(BuildContext context) {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: context.constLowValue),
+        margin: EdgeInsets.symmetric(horizontal: context.constHighValue),
         alignment: Alignment.centerLeft,
         child: Text(
-          detailModel.name,
+          organizationName,
           style: context.textTheme.headline5,
         ),
       ),
@@ -118,7 +142,16 @@ class _HackatonDetailState extends State<HackatonDetail> {
               bottomLeft: Radius.circular(context.constMediumValue),
               bottomRight: Radius.circular(context.constMediumValue)),
           child: Container(
-              child: PageView.builder(
+              child: Image.network(
+            organizationImage,
+            fit: BoxFit.cover,
+          ))),
+    );
+  }
+}
+/*
+ilerde kullanmak için şimdilik vaz geçildi
+child: PageView.builder(
             itemBuilder: (context, index) {
               return Image.asset(
                 detailModel.imagePaths[index],
@@ -126,7 +159,5 @@ class _HackatonDetailState extends State<HackatonDetail> {
               );
             },
             itemCount: detailModel.imagePaths.length,
-          ))),
-    );
-  }
-}
+          )
+          */

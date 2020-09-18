@@ -72,6 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Container hackathonCard(Size size) {
+    String organizationId;
+    String organizationImage;
+    String organizationName;
+    String organizationDescription;
     String imageUrl =
         "https://sm.mashable.com/t/mashable_in/photo/default/hackers-hackathon-india-pandemic-covid-19-lockdown_cxrq.960.jpg";
     return Container(
@@ -85,8 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HackatonDetail()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HackatonDetail(
+                        organizationId: organizationId,
+                        organizationImage: organizationImage,
+                        organizationName: organizationName,
+                        organizationDescription: organizationDescription)));
           },
           child: Column(
             children: [

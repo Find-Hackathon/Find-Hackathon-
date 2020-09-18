@@ -8,10 +8,12 @@ import '../../Core/Utils/custom_linear_grediant.dart';
 class FatButton extends StatelessWidget {
   final String text;
   final Function onPressed;
+  final bool isActive;
   const FatButton({
     Key key,
     this.text,
     this.onPressed,
+    this.isActive,
   }) : super(key: key);
 
   @override
